@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Endereco (models.Model):
     cep = models.CharField(max_length=10)
     logradouro = models.CharField(max_length=50)
