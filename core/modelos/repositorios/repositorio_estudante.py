@@ -1,25 +1,27 @@
-from core.modelos import BaseRepositorio
-from core.modelos import Estudante
+from core.modelos.repositorios.base_repositorio import BaseRepositorio
+from core.modelos.entidades.Estudante import Estudante
+
 
 class RepositorioEstudante(BaseRepositorio):
     def cadastrar(self, estudante: Estudante):
         return estudante.save()
-    
+
     def buscar(self, cpf):
         return Estudante.objects.get(cpf=cpf)
 
     def listar_todos(sefl):
         return Estudante.objects.all()
-    
+
     def atualizar(self, cpf, **kwargs):
         modifiers = dict(**kwargs)
         for k, v in kwargs.items():
-            if not hasattr(Estudante, k): del modifiers[k]
+            if not hasattr(Estudante, k):
+                del modifiers[k]
         estudante = Estudante.objects.filter(cpf=cpf)
         estudante.update(**modifiers)
         return estudante.first()
 
-     def remover(self, **kwargs):
+    def remover(self, **kwargs):
         estudante = Estudante.objects.get(**kwargs)
         if estudante:
             estudante.delete()

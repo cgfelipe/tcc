@@ -1,4 +1,4 @@
-from core.modelos import BaseRepositorio
+from core.modelos.repositorios.base_repositorio import BaseRepositorio
 
 
 class CadastroPessoa(object):

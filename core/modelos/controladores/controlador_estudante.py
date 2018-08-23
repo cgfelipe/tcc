@@ -1,5 +1,6 @@
-from core.modelos import CadastroEstudante
+from core.modelos.cadastros.cadastro_estudante import CadastroEstudante
 from core.modelos import RepositorioFactory
+
 
 class ControladorEstudante(object):
      cadastro_estudante = CadastroEstudante(RepositorioFactory())
