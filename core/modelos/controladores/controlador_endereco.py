@@ -19,4 +19,3 @@ class ControladorEndereco(object):
 
     def remover(self, **kwargs):
         return self.cadastro_endereco.remover(**kwargs)
-
