@@ -1,4 +1,5 @@
 from django.db import models
+from core.modelos.entidades.Professor import Professor
 
 class ProjetoDePesquisa(models.Model):
     idLattes = models.CharField(max_length=100)
@@ -8,6 +9,7 @@ class ProjetoDePesquisa(models.Model):
     keywords = models.ArrayField(ArrayField(models.CharField(max_length=200)))
     valorProjeto = models.FloatField()
     situacao = models.CharField(max_length=200)
-    alunos = 
-    professor=
+    alunos = models.CharField(max_length=200)
+    professor= models.OneToOneField(
+       Professor, on_delete=models.CASCADE, null=False, verbose_name='professor orientador')
     departamentoResponsavel = 

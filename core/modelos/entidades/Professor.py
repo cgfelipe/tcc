@@ -17,3 +17,4 @@ class Professor(Pessoa):
     salario = models.FloatField(null=False)
     agenciaBancaria = models.CharField()
     contaBancaria = models.CharField()
+    projetos = models.CharField(max_length=500)
