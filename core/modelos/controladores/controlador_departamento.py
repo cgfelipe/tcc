@@ -2,7 +2,7 @@ from core.modelos.cadastros.cadastro_departamento import CadastroDepartamento
 from core.modelos import RepositorioFactory
 
 
-class ControladorEndereco(object):
+class ControladorDepartamento(object):
      cadastro_departamento = CadastroDepartamento(RepositorioFactory())
 
     def cadastrar(self, departamento):
