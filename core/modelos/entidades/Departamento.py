@@ -10,3 +10,4 @@ class Departamento(models.Model):
     )
     quantidadeSalas = models.IntegerField()
     rendaAnual = models.FloatField()
+    cursos = models.ArrayField(ArrayField(models.CharField(max_length=200)))
