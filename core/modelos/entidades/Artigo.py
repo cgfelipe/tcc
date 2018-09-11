@@ -3,6 +3,7 @@ from core.modelos.entidades.Pessoa import Pessoa
 from core.modelos.entidades.Estudante import Estudante
 from core.modelos.entidades.Professor import Professor
 
+
 class Artigo(models.Model):
     titulo = models.CharField(max_length=200)
     data = models.DateField()

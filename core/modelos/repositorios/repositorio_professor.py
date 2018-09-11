@@ -9,7 +9,7 @@ class RepositorioProfessor(BaseRepositorio):
     def buscar(self, cpf):
         return Professor.objects.get(cpf=cpf)
 
-    def listar_todos(sefl):
+    def listar_todos(self):
         return Professor.objects.all()
 
     def atualizar(self, cpf, **kwargs):
