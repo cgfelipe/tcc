@@ -5,10 +5,31 @@
 
 {% block content %}
 
-    <div class="btn-group-lg">
-        <a class="btn btn-block btn-default" href="{% url 'cadastrar_estudante' %}">Cadastrar Estudante</a>
-        <a class="btn btn-block btn-default" href="{% url 'listar_estudantes' %}">Lista de Estudantes</a>
-<hr>
-    </div>
+<div class="btn-group-lg">
+    <a class="btn btn-block btn-default" href="{% url 'cadastrar_estudante' %}">Cadastrar Estudante</a>
+    <a class="btn btn-block btn-default" href="{% url 'listar_estudantes' %}">Lista de Estudantes</a>
+    <hr>
+    <a class="btn btn-block btn-default" href="{% url 'cadastrar_professor' %}">Cadastrar Professor</a>
+    <a class="btn btn-block btn-default" href="{% url 'listar_professores' %}">Lista de Professores</a>
+    <hr>
+    <a class="btn btn-block btn-default" href="{% url 'cadastrar_departamento' %}">Cadastrar Departamento</a>
+    <a class="btn btn-block btn-default" href="{% url 'listar_departamentos' %}">Lista de Departamentos</a>
+    <hr>
+    <a class="btn btn-block btn-default" href="{% url 'cadastrar_instituicao' %}">Cadastrar Instituição</a>
+    <a class="btn btn-block btn-default" href="{% url 'listar_instituicoes' %}">Lista de Instituições</a>
+    <hr>
+    <a class="btn btn-block btn-default" href="{% url 'cadastrar_livro' %}">Cadastrar Livro</a>
+    <a class="btn btn-block btn-default" href="{% url 'listar_livros' %}">Lista de Livros</a>
+    <hr>
+    <a class="btn btn-block btn-default" href="{% url 'cadastrar_curriculo' %}">Cadastrar Curriculo</a>
+    <a class="btn btn-block btn-default" href="{% url 'listar_curriculos' %}">Lista de Curriculos</a>
+    <hr>
+    <a class="btn btn-block btn-default" href="{% url 'cadastrar_projeto_pesquisa' %}">Cadastrar Projeto de Pesquisa</a>
+    <a class="btn btn-block btn-default" href="{% url 'listar_projetos_pesquisa' %}">Lista de Projetos de Pesquisa</a>
+    <hr>
+    <a class="btn btn-block btn-default" href="{% url 'cadastrar_especialidade' %}">Cadastrar Especialidade</a>
+    <a class="btn btn-block btn-default" href="{% url 'listar_especialidades' %}">Lista de Especialidades</a>
+    <hr>
+</div>
 
 {% endblock %}
