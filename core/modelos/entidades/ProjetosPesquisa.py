@@ -3,16 +3,3 @@ from core.modelos.entidades.Professor import Professor
 from core.modelos.entidades.Departamento import Departamento
 
 
-class ProjetoDePesquisa(models.Model):
-    idLattes = models.CharField(max_length=100)
-    titulo = models.CharField(max_length=200)
-    inicio = models.DateField()
-    fim = models.DateField()
-    keywords = models.CharField(max_length=200)
-    valorProjeto = models.FloatField()
-    situacao = models.CharField(max_length=200)
-    alunos = models.CharField(max_length=200)
-    professor = models.OneToOneField(
-        Professor, on_delete=models.CASCADE, null=False, verbose_name='professor orientador')
-    departamentoResponsavel = models.OneToOneField(
-        Departamento, on_delete=models.CASCADE, null=False, verbose_name='departamento responsavel')
