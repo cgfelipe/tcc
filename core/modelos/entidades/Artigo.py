@@ -17,3 +17,5 @@ class Artigo(models.Model):
     classificacao = models.CharField(max_length=10)
     apresentacao = models.BooleanField()
     disciplina = models.CharField(max_length=30)
+
+
