@@ -37,9 +37,37 @@ class Endereco(Base, models.Model):
 class Especialidade(models.Model):
     titulo = models.CharField(max_length=20)
 
+    @staticmethod
+    def buscar(_titulo):
+        return Especialidade.objects.get(titulo=_titulo)
+
+    @staticmethod
+    def listar_todos():
+        return Especialidade.objects.all()
+
+    def atualizar(self, **kwargs):
+        return self.update(**kwargs)
+
+    def remover(self, **kwargs):
+        return self.delete()
+
 
 class Escolaridade(models.Model):
     titulo = models.CharField(max_length=20)
+
+    @staticmethod
+    def buscar(_titulo):
+        return Escolaridade.objects.get(titulo=_titulo)
+
+    @staticmethod
+    def listar_todos():
+        return Escolaridade.objects.all()
+
+    def atualizar(self, **kwargs):
+        return self.update(**kwargs)
+
+    def remover(self, **kwargs):
+        return self.delete()
 
 
 class Pessoa(Base, models.Model):
@@ -110,6 +138,20 @@ class Departamento(models.Model):
     rendaAnual = models.FloatField()
     cursos = models.ArrayField(ArrayField(models.CharField(max_length=200)))
 
+    @staticmethod
+    def buscar(_nome):
+        return Departamento.objects.get(nome=_nome)
+
+    @staticmethod
+    def listar_todos():
+        return Departamento.objects.all()
+
+    def atualizar(self, **kwargs):
+        return self.update(**kwargs)
+
+    def remover(self, **kwargs):
+        return self.delete()
+
 
 class Curriculo(Base, models.Model):
     objetivo = models.CharField(max_lenght=500)
@@ -124,6 +166,20 @@ class Curriculo(Base, models.Model):
     experiencia = models.CharField(max_lenght=500)
     competencias = models.CharField(max_lenght=500)
     formacoes = models.CharField(max_lenght=500)
+
+    @staticmethod
+    def buscar(_idLattes):
+        return Curriculo.objects.get(idLattes=_idLattes)
+
+    @staticmethod
+    def listar_todos():
+        return Curriculo.objects.all()
+
+    def atualizar(self, **kwargs):
+        return self.update(**kwargs)
+
+    def remover(self, **kwargs):
+        return self.delete()
 
 
 class Artigo(Base, models.Model):
@@ -141,8 +197,8 @@ class Artigo(Base, models.Model):
     disciplina = models.CharField(max_length=30)
 
     @staticmethod
-    def buscar(_id):
-        return Artigo.objects.get(id=_id)
+    def buscar(_titulo):
+        return Artigo.objects.get(titulo=_titulo)
 
     @staticmethod
     def listar_todos():
@@ -170,6 +226,20 @@ class Instituicao(models.Model):
         Departamento, on_delete=models.CASCADE, verbose_name='lista de departamentos')
     rendaAnual = models.FloatField()
 
+    @staticmethod
+    def buscar(_cnpj):
+        return Instituicao.objects.get(cnpj=_cnpj)
+
+    @staticmethod
+    def listar_todos():
+        return Instituicao.objects.all()
+
+    def atualizar(self, **kwargs):
+        return self.update(**kwargs)
+
+    def remover(self, **kwargs):
+        return self.delete()
+
 
 class Livro(models.Model):
     titulo = models.CharField()
@@ -183,6 +253,20 @@ class Livro(models.Model):
     estudante = models.OneToOneField(
         Estudante, on_delete=models.CASCADE, null=False, verbose_name='estudante que usa o livro')
     emprestado = models.BooleanField()
+
+    @staticmethod
+    def buscar(titulo):
+        return Livro.objects.get(titulo=_titulo)
+
+    @staticmethod
+    def listar_todos():
+        return Livro.objects.all()
+
+    def atualizar(self, **kwargs):
+        return self.update(**kwargs)
+
+    def remover(self, **kwargs):
+        return self.delete()
 
 
 class ProjetoDePesquisa(models.Model):
@@ -198,3 +282,17 @@ class ProjetoDePesquisa(models.Model):
         Professor, on_delete=models.CASCADE, null=False, verbose_name='professor orientador')
     departamentoResponsavel = models.OneToOneField(
         Departamento, on_delete=models.CASCADE, null=False, verbose_name='departamento responsavel')
+
+    @staticmethod
+    def buscar(_idLattes):
+        return ProjetoDePesquisa.objects.get(idLattes=_idLattes)
+
+    @staticmethod
+    def listar_todos():
+        return ProjetoDePesquisa.objects.all()
+
+    def atualizar(self, **kwargs):
+        return self.update(**kwargs)
+
+    def remover(self, **kwargs):
+        return self.delete()
