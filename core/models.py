@@ -80,7 +80,7 @@ class Pessoa(Base, models.Model):
         Endereco, on_delete=models.CASCADE, null=False, verbose_name='endereço da pessoa')
     usuario = models.CharField(max_length=20)
     senha = models.CharField(max_length=50)
-    cpf = models.CharField(primary_key=True, max_lenght=11)
+    cpf = models.CharField(primary_key=True, max_length=11)
     rg = models.CharField(max_length=8)
 
     @classmethod
@@ -109,13 +109,13 @@ class Professor(Pessoa):
         Especialidade, on_delete=models.CASCADE, null=False, verbose_name='especialidades do professor'
     )
     salario = models.FloatField(null=False)
-    agenciaBancaria = models.CharField()
-    contaBancaria = models.CharField()
+    agenciaBancaria = models.CharField(max_length=200)
+    contaBancaria = models.CharField(max_length=200)
     projetos = models.CharField(max_length=500)
 
 
 class Estudante(Pessoa):
-    matricula = models.CharField(primary_key=True, max_lenght=11)
+    matricula = models.CharField(primary_key=True, max_length=11)
     escolaridade = models.OneToOneField(
         Escolaridade, on_delete=models.CASCADE, null=False, verbose_name='escolaridade do aluno')
     dataMatricula = models.DateField()
@@ -124,9 +124,11 @@ class Estudante(Pessoa):
     coeficienteRendimento = models.FloatField()
     bolsista = models.BooleanField()
     bolsa = models.FloatField()
-    agenciaBancaria = models.CharField()
-    contaBancaria = models.CharField()
+    agenciaBancaria = models.CharField(max_length=200)
+    contaBancaria = models.CharField(max_length=200)
 
+class Curso(models.Model):
+    pass
 
 class Departamento(models.Model):
     nome = models.CharField(max_length=200)
@@ -136,7 +138,7 @@ class Departamento(models.Model):
     )
     quantidadeSalas = models.IntegerField()
     rendaAnual = models.FloatField()
-    cursos = models.ArrayField(ArrayField(models.CharField(max_length=200)))
+    cursos = models.ManyToManyField(to=Curso)
 
     @staticmethod
     def buscar(_nome):
@@ -154,18 +156,18 @@ class Departamento(models.Model):
 
 
 class Curriculo(Base, models.Model):
-    objetivo = models.CharField(max_lenght=500)
+    objetivo = models.CharField(max_length=500)
     pessoa = models.OneToOneField(
         Pessoa, on_delete=models.CASCADE, null=False, verbose_name='responsavel do curriculo')
-    idLattes = models.CharField(max_lenght=10)
+    idLattes = models.CharField(max_length=10)
     pretensaoSalarial = models.FloatField()
     ultimaAtualizacao = models.DateField()
-    titulo = models.CharField(max_lenght=30)
+    titulo = models.CharField(max_length=30)
     endereco = models.OneToOneField(
         Endereco, on_delete=models.CASCADE, null=False, verbose_name='endereco do curriculo')
-    experiencia = models.CharField(max_lenght=500)
-    competencias = models.CharField(max_lenght=500)
-    formacoes = models.CharField(max_lenght=500)
+    experiencia = models.CharField(max_length=500)
+    competencias = models.CharField(max_length=500)
+    formacoes = models.CharField(max_length=500)
 
     @staticmethod
     def buscar(_idLattes):
@@ -212,15 +214,15 @@ class Artigo(Base, models.Model):
 
 
 class Instituicao(models.Model):
-    nome = models.CharField()
-    cnpj = models.CharField(primary_key=True)
+    nome = models.CharField(max_length=200)
+    cnpj = models.CharField(primary_key=True, max_length=15)
     endereco = models.OneToOneField(
         Endereco, on_delete=models.CASCADE, null=False, verbose_name='endereço da instituição')
     fundador = models.OneToOneField(
         Pessoa, on_delete=models.CASCADE, null=False, verbose_name='fundador da instituição')
     dataFundacao = models.DateField()
-    site = models.CharField()
-    telefone = models.CharField()
+    site = models.CharField(max_length=200)
+    telefone = models.CharField(max_length=200)
     numeroFuncionarios = models.IntegerField()
     departamentos = models.ForeignKey(
         Departamento, on_delete=models.CASCADE, verbose_name='lista de departamentos')
@@ -242,14 +244,14 @@ class Instituicao(models.Model):
 
 
 class Livro(models.Model):
-    titulo = models.CharField()
+    titulo = models.CharField(max_length=200)
     autores = models.CharField(max_length=200)
-    editora = models.CharField()
+    editora = models.CharField(max_length=200)
     edicao = models.IntegerField()
     valor = models.FloatField()
     dataCriacao = models.DateField()
     ano = models.IntegerField()
-    disciplinas = models.CharField()
+    disciplinas = models.CharField(max_length=200)
     estudante = models.OneToOneField(
         Estudante, on_delete=models.CASCADE, null=False, verbose_name='estudante que usa o livro')
     emprestado = models.BooleanField()
