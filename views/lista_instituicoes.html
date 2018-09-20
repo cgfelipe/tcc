@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title_section %}Lista de Instituições{% endblock %}
+
+{% block content %}
+<ul class="list-group">
+    {% for instituicao in Instituicoes %}
+    <a href="{% url 'visualizar_instituicao' instituicao.cnpj %}">
+        <li class="list-group-item">{{ instituicao.nome }} <span class="badge">{{ instituicao.cnpj }}</span></li>
+    </a>
+    {% endfor %}
+</ul>
+
+{% endblock %}

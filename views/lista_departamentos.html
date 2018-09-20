@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title_section %}Lista de Departamentos{% endblock %}
+
+{% block content %}
+<ul class="list-group">
+    {% for departamento in departamentos %}
+    <a href="{% url 'visualizar_departamento' departamento.nome %}">
+        <li class="list-group-item">{{ departamento.nome }} <span class="badge">{{ departamento.diretor }}</span></li>
+    </a>
+    {% endfor %}
+</ul>
+
+{% endblock %}

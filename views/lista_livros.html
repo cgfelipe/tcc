@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title_section %}Lista de Livros{% endblock %}
+
+{% block content %}
+<ul class="list-group">
+    {% for livro in livros %}
+    <a href="{% url 'visualizar_livro' livro.titulo %}">
+        <li class="list-group-item">{{ livro.titulo }} <span class="badge">{{ livro.autores }}</span></li>
+    </a>
+    {% endfor %}
+</ul>
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title_section %}Lista de Projetos de Pesquisa{% endblock %}
+
+{% block content %}
+<ul class="list-group">
+    {% for projeto_pesquisa in projetos_pesquisa %}
+    <a href="{% url 'visualizar_projeto_pesquisa' projeto_pesquisa.idLattes %}">
+        <li class="list-group-item">{{ projeto_pesquisa.titulo }} <span class="badge">{{ projeto_pesquisa.idLattes }}</span></li>
+    </a>
+    {% endfor %}
+</ul>
+
+{% endblock %}

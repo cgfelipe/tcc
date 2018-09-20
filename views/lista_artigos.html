@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title_section %}Lista de Artigos{% endblock %}
+
+{% block content %}
+<ul class="list-group">
+    {% for artigo in artigos %}
+    <a href="{% url 'visualizar_artigo' artigo.titulo %}">
+        <li class="list-group-item">{{ artigo.titulo }} <span class="badge">{{ artigo.classificacao }}</span></li>
+    </a>
+    {% endfor %}
+</ul>
+
+{% endblock %}
