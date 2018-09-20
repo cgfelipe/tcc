@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8a5af6de-c5d3-4128-9886-f8ed85b4dfba" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/core/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tcc/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/tcc/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tcc/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/tcc/urls.py" afterDir="false" />
-    </list>
+    <list default="true" id="8a5af6de-c5d3-4128-9886-f8ed85b4dfba" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
