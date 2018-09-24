@@ -36,5 +36,8 @@ urlpatterns = [
         name='listar_projetos_pesquisa'),
     url(r'^listar_departamentos', entities_views.departamentos,
         name='listar_departamentos'),
+
+    url(r'^cadastro_especialidade', entities_views.cadastro_especialidade,
+        name='cadastro_especialidade'),
     url(r'$', admin.site.login, name='login_gui'),
 ]

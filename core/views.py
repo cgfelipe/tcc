@@ -1,7 +1,9 @@
 from django.shortcuts import render
+from django.shortcuts import redirect
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from core.models import Estudante
+from tcc import forms
 import uuid
 from django.views.decorators.csrf import csrf_exempt
 import json
@@ -39,6 +41,18 @@ def projetos_pesquisa(request):
 
 def departamentos(request):
     return render(request, 'list_departamentos.html')
+
+
+def cadastro_especialidade(request):
+    if request.method == 'POST':
+        form = forms.EspecialidadeForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            return redirect('index')
+    else:
+        form = forms.EspecialidadeForm()
+    return render(request, 'cadastro_especialidade.html', {'form': form})
 
 
 @api_view(['POST'])
