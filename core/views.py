@@ -7,8 +7,20 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 
 # Create your views here.
+def index(request):
+    return render(request, 'index.html')
+
+def artigos(request):
+    return render(request, 'lista_artigos.html')
+
+def livros(request):
+    return render(request, 'lista_livros.html')
+
+def estudantes(request):
+    return render(request, 'estudantes.html')
 
 @api_view(['POST'])
+@csrf_exempt
 def registrar_estudante(request):
     Estudante(**request.data).save()
     return Response(status=200)

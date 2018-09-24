@@ -1,11 +1,10 @@
-<!DOCTYPE html>
+<!DOCTYPE html>{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Universidade | {% block title_section %}{% endblock %}</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{% static 'assets/bootstrap.min.css' %}" media="screen" />
+    <link rel="stylesheet" href="{% static 'assets/custom.min.css' %}" media="screen" />
     <script>
         $(document).ready(function () {
             $('input, textarea, select').addClass('form-control');
@@ -13,7 +12,46 @@
     </script>
 </head>
 <body>
-
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <a href="" class="navbar-brand">Universidade X</a>
+        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="navbar-collapse collapse" id="navbar-main">
+        <ul class="nav navbar-nav">
+          <li>
+            <a href="{% url 'index' %}">Início</a>
+          </li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Categorias
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="download">
+              <li>
+                <a href="{% url 'listar_estudantes' %}">Estudantes</a>
+              </li>
+              <li>
+                <a href="{% url 'listar_livros' %}">Professores</a>
+              </li>
+              <li>
+                <a href="{% url 'listar_livros' %}">Livros</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="{% url 'login_gui' %}">Minha Conta</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
     {% for message in messages %}
       <div class="alert {{ message.tags }} alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -27,5 +65,7 @@
         {% block content %}
         {% endblock %}
     </div>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="{% static 'assets/bootstrap.min.js' %}"></script>
 </body>
 </html>

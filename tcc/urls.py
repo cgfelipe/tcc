@@ -25,23 +25,9 @@ from django.views.decorators.csrf import csrf_exempt
 router = routers.DefaultRouter()
 
 urlpatterns = [
-    # path('/admin', admin.site.urls),
-    url(r'^admin/', admin.site.urls),
-    url(r'^cadastrar_estudante', csrf_exempt(entities_views.registrar_estudante), name='registrar_estudante'),
+    url(r'^admin', entities_views.index, name='index'),
+    url(r'^listar_estudante', entities_views.estudantes, name='listar_estudantes'),
+    url(r'listar_artigos', entities_views.artigos, name='listar_artigos'),
+    url(r'^listar_livros', entities_views.livros, name='listar_livros'),
     url(r'$', admin.site.login, name='login_gui'),
-    # path('/listar_estudantes', views.listar_estudantes),
-    # path('/cadastrar_professor', views.cadastrar_professor),
-    # path('/listar_professores', views.listar_professores),
-    # path('/cadastrar_departamento', views.cadastrar_departamento),
-    # path('/listar_departamentos', views.listar_departamentos),
-    # path('/cadastrar_instituicao', views.cadastrar_instituicao),
-    # path('/listar_instituicoes', views.listar_instituicoes),
-    # path('/cadastrar_livro', views.cadastrar_livro),
-    # path('/listar_livros', views.listar_livros),
-    # path('/cadastrar_curriculo', views.cadastrar_curriculo),
-    # path('/listar_curriculos', views.listar_curriculos),
-    # path('/cadastrar_projeto_pesquisa', views.cadastrar_projeto_pesquisa),
-    # path('/listar_projetos_pesquisa', views.listar_projetos_pesquisa),
-    # path('/cadastrar_especialidade', views.cadastrar_especialidade),
-    # path('/listar_especialidades', views.listar_especialidades),
 ]
