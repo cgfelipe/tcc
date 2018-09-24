@@ -7,17 +7,39 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 
 # Create your views here.
+
+
 def index(request):
     return render(request, 'index.html')
+
 
 def artigos(request):
     return render(request, 'lista_artigos.html')
 
+
 def livros(request):
     return render(request, 'lista_livros.html')
 
+
 def estudantes(request):
     return render(request, 'estudantes.html')
+
+
+def curriculos(request):
+    return render(request, 'lista_curriculos.html')
+
+
+def instituicoes(request):
+    return render(request, 'lista_instituicoes.html')
+
+
+def projetos_pesquisa(request):
+    return render(request, 'list_projetos_pesquisa.html')
+
+
+def departamentos(request):
+    return render(request, 'list_departamentos.html')
+
 
 @api_view(['POST'])
 @csrf_exempt
@@ -25,9 +47,11 @@ def registrar_estudante(request):
     Estudante(**request.data).save()
     return Response(status=200)
 
+
 @api_view(['GET'])
 def listar_estudantes(request):
     return Response(json.dumps(Estudante.listar_todos()), status=200)
+
 
 @api_view(['POST'])
 def atualizar_estudante(request):
@@ -36,6 +60,7 @@ def atualizar_estudante(request):
     del update_dict['cpf']
     e.atualizar(**update_dict)
     return Response(status=200)
+
 
 @api_view(['DELETE'])
 def remover_estudante(request):

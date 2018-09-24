@@ -3,6 +3,7 @@
 {% block title_section %}Lista de Artigos{% endblock %}
 
 {% block content %}
+<p>teste</p>
 <ul class="list-group">
     {% for artigo in artigos %}
     <a href="{% url 'visualizar_artigo' artigo.titulo %}">
