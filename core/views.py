@@ -55,6 +55,18 @@ def cadastro_especialidade(request):
     return render(request, 'cadastro_especialidade.html', {'form': form})
 
 
+def cadastro_escolaridade(request):
+    if request.method == 'POST':
+        form = forms.EscolaridadeForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            return redirect('index')
+    else:
+        form = forms.EspecialidadeForm()
+    return render(request, 'cadastro_escolaridade.html', {'form': form})
+
+
 @api_view(['POST'])
 @csrf_exempt
 def registrar_estudante(request):
