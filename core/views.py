@@ -51,7 +51,7 @@ def cadastro_estudante(request):
             return redirect('index')
     else:
         form = forms.EspecialidadeForm()
-    return render(request, 'cadastro_estudante.html', {'form': form})
+    return render(request, 'cadastro_estudantes.html', {'form': form})
 
 
 def cadastro_especialidade(request):
