@@ -45,13 +45,14 @@ def departamentos(request):
 def cadastro_estudante(request):
     if request.method == 'POST':
         form = forms.EstudanteForm(request.POST)
+        form_endereco = forms.EstudanteForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
             return redirect('index')
     else:
         form = forms.EspecialidadeForm()
-    return render(request, 'cadastro_estudantes.html', {'form': form})
+        return render(request, 'cadastro_estudante.html', {'form': form, 'form_endereco': form_endereco})
 
 
 def cadastro_especialidade(request):
