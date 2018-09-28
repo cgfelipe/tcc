@@ -35,7 +35,7 @@ class Endereco(Base, models.Model):
 
 
 class Especialidade(models.Model):
-    titulo = models.CharField(max_length=20)
+    titulo = models.CharField(max_length=50)
 
     @staticmethod
     def buscar(_titulo):
@@ -127,8 +127,10 @@ class Estudante(Pessoa):
     agenciaBancaria = models.CharField(max_length=200)
     contaBancaria = models.CharField(max_length=200)
 
+
 class Curso(models.Model):
     pass
+
 
 class Departamento(models.Model):
     nome = models.CharField(max_length=200)
