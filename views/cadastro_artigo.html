@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title_section %}Cadastrar Artigo{% endblock %}
+
+{% block content %}
+<form class="form-group" method="post" action="{% url 'cadastro_artigo' %}">
+    {% csrf_token %}
+    <fieldset>
+        <br />
+        <br />
+        <br />
+        <br />
+        {{ form.as_p }}
+    </fieldset>
+    <button type="submit" class="btn btn-lg btn-block btn-success">Cadastrar Artigo</button>
+</form>
+
+{% endblock %}

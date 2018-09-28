@@ -36,11 +36,11 @@ def instituicoes(request):
 
 
 def projetos_pesquisa(request):
-    return render(request, 'list_projetos_pesquisa.html')
+    return render(request, 'lista_projetos_pesquisa.html')
 
 
 def departamentos(request):
-    return render(request, 'list_departamentos.html')
+    return render(request, 'lista_departamentos.html')
 
 def cadastro_estudante(request):
     if request.method == 'POST':
@@ -56,6 +56,21 @@ def cadastro_estudante(request):
         form = forms.EstudanteForm()
         form_endereco = forms.EnderecoForm()
         return render(request, 'cadastro_estudante.html', {'form': form, 'form_endereco': form_endereco})
+
+def cadastro_instituicao(request):
+    if request.method == 'POST':
+        form = forms.InstituicaoForm(request.POST)
+        form_endereco = forms.EnderecoForm(request.POST)
+        if form.is_valid() & form_endereco.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            post_endereco = form_endereco.save(commit=False)
+            post_endereco.save()
+            return redirect('lista_instituicoes.html')
+    else:
+        form = forms.InstituicaoForm()
+        form_endereco = forms.EnderecoForm()
+        return render(request, 'cadastro_instituicao.html', {'form': form, 'form_endereco': form_endereco})
 
 def cadastro_curriculo(request):
     if request.method == 'POST':
@@ -101,6 +116,29 @@ def cadastro_livro(request):
     else:
         form = forms.LivroForm()
         return render(request, 'cadastro_livro.html', {'form': form})
+
+def cadastro_projeto_pesquisa(request):
+    if request.method == 'POST':
+        form = forms.ProjetoPesquisaForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            return redirect('lista_projetos_pesquisa.html')
+    else:
+        form = forms.ProjetoPesquisaForm()
+        return render(request, 'cadastro_livro.html', {'form': form})
+
+
+def cadastro_artigo(request):
+    if request.method == 'POST':
+        form = forms.ArtigoForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            return redirect('lista_artigos.html')
+    else:
+        form = forms.ArtigoForm()
+        return render(request, 'cadastro_artigo.html', {'form': form})
 
 
 
