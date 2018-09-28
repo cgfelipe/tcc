@@ -6,6 +6,11 @@
 <form class="form-group" method="post" action="{% url 'cadastro_especialidade' %}">
     {% csrf_token %}
     <fieldset>
+    </fieldset>
+        <br />
+        <br />
+        <br />
+        <br />
         {{ form.as_p }}
     </fieldset>
     <button type="submit" class="btn btn-lg btn-block btn-success">Cadastrar Especialidade</button>

@@ -3,9 +3,16 @@
 {% block title_section %}Cadastrar Escolaridade{% endblock %}
 
 {% block content %}
+
 <form class="form-group" method="post" action="{% url 'cadastro_estudante' %}">
+    <br />
+    <br />
     {% csrf_token %}
     <fieldset>
+        <br />
+        <br />
+        <br />
+        <br />
         {{ form.as_p }}
     </fieldset>
     <fieldset>

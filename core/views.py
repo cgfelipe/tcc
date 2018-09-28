@@ -45,15 +45,28 @@ def departamentos(request):
 def cadastro_estudante(request):
     if request.method == 'POST':
         form = forms.EstudanteForm(request.POST)
-        form_endereco = forms.EstudanteForm(request.POST)
+        form_endereco = forms.EnderecoForm(request.POST)
+        if form.is_valid() & form_endereco.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            post_endereco = form_endereco.save(commit=False)
+            post_endereco.save()
+            return redirect('estudantes.html')
+    else:
+        form = forms.EstudanteForm()
+        form_endereco = forms.EnderecoForm()
+        return render(request, 'cadastro_estudante.html', {'form': form, 'form_endereco': form_endereco})
+
+def cadastro_curriculo(request):
+    if request.method == 'POST':
+        form = forms.CurriculoForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
-            return redirect('index')
+            return redirect('lista_curriculos.html')
     else:
-        form = forms.EspecialidadeForm()
-        return render(request, 'cadastro_estudante.html', {'form': form, 'form_endereco': form_endereco})
-
+        form = forms.LivroForm()
+        return render(request, 'cadastro_curriculo.html', {'form': form})
 
 def cadastro_especialidade(request):
     if request.method == 'POST':
@@ -77,6 +90,17 @@ def cadastro_escolaridade(request):
     else:
         form = forms.EspecialidadeForm()
     return render(request, 'cadastro_escolaridade.html', {'form': form})
+
+def cadastro_livro(request):
+    if request.method == 'POST':
+        form = forms.LivroForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            return redirect('lista_livros.html')
+    else:
+        form = forms.LivroForm()
+        return render(request, 'cadastro_livro.html', {'form': form})
 
 
 

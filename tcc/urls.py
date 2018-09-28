@@ -40,5 +40,11 @@ urlpatterns = [
         name='cadastro_especialidade'),
     url(r'^cadastro_estudante', entities_views.cadastro_estudante,
         name='cadastro_estudante'),
+    url(r'^cadastro_escolaridade', entities_views.cadastro_escolaridade,
+        name='cadastro_escolaridade'),
+    url(r'^cadastro_livro', entities_views.cadastro_livro,
+        name='cadastro_livro'),
+    url(r'^cadastro_curriculo', entities_views.cadastro_curriculo,
+        name='cadastro_curriculo'),
     url(r'$', admin.site.login, name='login_gui'),
 ]
