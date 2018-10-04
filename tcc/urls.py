@@ -36,6 +36,8 @@ urlpatterns = [
         name='listar_projetos_pesquisa'),
     url(r'^listar_departamentos', entities_views.departamentos,
         name='listar_departamentos'),
+    url(r'^listar_especialidades', entities_views.especialidades,
+        name='listar_especialidades'),
     url(r'^cadastro_especialidade', entities_views.cadastro_especialidade,
         name='cadastro_especialidade'),
     url(r'^cadastro_estudante', entities_views.cadastro_estudante,
@@ -52,5 +54,9 @@ urlpatterns = [
         name='cadastro_artigo'),
     url(r'^cadastro_projeto_pesquisa', entities_views.cadastro_projeto_pesquisa,
         name='cadastro_projeto_pesquisa'),
+    url(r'^cadastro_departamento', entities_views.cadastro_departamento,
+        name='cadastro_departamento'),
+    url(r'^cadastro_especialidade', entities_views.cadastro_especialidade,
+        name='cadastro_especialidade'),
     url(r'$', admin.site.login, name='login_gui'),
 ]

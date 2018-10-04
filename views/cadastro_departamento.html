@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title_section %}Cadastrar Departamento{% endblock %}
+
+{% block content %}
+<form class="form-group" method="post" action="{% url 'cadastro_departamento' %}">
+    {% csrf_token %}
+    <fieldset>
+    </fieldset>
+        <br />
+        <br />
+        <br />
+        <br />
+        {{ form.as_p }}
+    </fieldset>
+    <button type="submit" class="btn btn-lg btn-block btn-success">Cadastrar Departamento</button>
+</form>
+
+{% endblock %}

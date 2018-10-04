@@ -38,6 +38,9 @@ def instituicoes(request):
 def projetos_pesquisa(request):
     return render(request, 'lista_projetos_pesquisa.html')
 
+def especialidades(request):
+    return render(request, 'listar_especialidades.html')
+
 
 def departamentos(request):
     return render(request, 'lista_departamentos.html')
@@ -127,6 +130,28 @@ def cadastro_projeto_pesquisa(request):
     else:
         form = forms.ProjetoPesquisaForm()
         return render(request, 'cadastro_livro.html', {'form': form})
+
+def cadastro_departamento(request):
+    if request.method == 'POST':
+        form = forms.DepartamentoForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            return redirect('lista_departamentos.html')
+    else:
+        form = forms.DepartamentoForm()
+        return render(request, 'cadastro_departamento.html', {'form': form})
+
+def cadastro_especialidade(request):
+    if request.method == 'POST':
+        form = forms.EspecialidadeForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            return redirect('listar_especialidades.html')
+    else:
+        form = forms.EspecialidadeForm()
+        return render(request, 'cadastro_especialidade.html', {'form': form})
 
 
 def cadastro_artigo(request):
