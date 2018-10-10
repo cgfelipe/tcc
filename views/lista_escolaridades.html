@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title_section %}Artigos{% endblock %}
+{% block title_section %}Escolaridades{% endblock %}
 
 {% block content %}
 
@@ -9,13 +9,13 @@
         <div class="col-sm">
             <br />
             <div class="page-header">
-                <h1>Artigos</h1>
+                <h1>Escolaridades</h1>
             </div>
         </div>
         <div class="col-sm">
         </div>
         <div class="col-sm">
-            <button type="button" class="btn btn-primary"><a href="{% url 'cadastro_artigo' %}">Adicionar</a></button>
+            <button type="button" class="btn btn-primary"><a href="{% url 'cadastro_escolaridade' %}">Adicionar</a></button>
         </div>
     </div>
 </div>
@@ -27,15 +27,7 @@
 
         <thead>
             <th>Titulo</th>
-            <th>Data</th>
-            <th>Estudante</th>
-            {% comment %} <th>Professor</th> {% endcomment %}
-            {% comment %} <th>Resumo</th> {% endcomment %}
-            {% comment %} <th>Páginas/th> {% endcomment %}
-            <th>Nota</th>
-            {% comment %} <th>Classificação</th> {% endcomment %}
-            {% comment %} <th>Apresentação</th> {% endcomment %}
-            {% comment %} <th>Disciplina</th> {% endcomment %}
+
             <th>Atualizar</th>
             <th>Remover</th>
         </thead>
@@ -44,9 +36,6 @@
             {% for o in lista %}
             <tr class="{% cycle 'row1' 'row2' %}">
                 <td>{{o.titulo}}</td>
-                <td>{{o.data}}</td>
-                <td>{{o.estudante}}</td>
-                <td>{{o.nota}}</td>
                 <td>
                     <p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs"
                             data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p>
