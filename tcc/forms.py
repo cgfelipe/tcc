@@ -70,7 +70,7 @@ class EstudanteForm(ModelForm):
         fields = ['matricula', 'escolaridade', 'dataMatricula', 'dataColacao', 'usosRestauranteUniversitario', 'coeficienteRendimento', 'bolsista', 'bolsa', 'agenciaBancaria', 'contaBancaria']
 
 
-# class ProfessorForm(ModelForm):
-#     class Meta:
-#         model = models.Professor
-#         fields = ['', ]
+class ProfessorForm(ModelForm):
+    class Meta:
+        model = models.Professor
+        fields = ['escolaridade', 'inscricao', 'dataAdmissao', 'interino', 'concursado', 'especialidade', 'salario', 'agenciaBancaria', 'contaBancaria', 'projetos']
