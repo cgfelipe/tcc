@@ -39,7 +39,7 @@ def projetos_pesquisa(request):
     return render(request, 'lista_projetos_pesquisa.html')
 
 def especialidades(request):
-    return render(request, 'listar_especialidades.html')
+    return render(request, 'lista_especialidades.html')
 
 
 def departamentos(request):
