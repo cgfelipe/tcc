@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from core.models import Estudante
+from core import models
 from tcc import forms
 import uuid
 from django.views.decorators.csrf import csrf_exempt
@@ -16,34 +16,50 @@ def index(request):
 
 
 def artigos(request):
-    return render(request, 'lista_artigos.html')
+    lista = models.Artigo.listar_todos()
+    return render(request, 'lista_artigos.html', {"lista": lista})
 
 
 def livros(request):
-    return render(request, 'lista_livros.html')
+    lista = models.Livro.listar_todos()
+    return render(request, 'lista_livros.html', {"lista": lista})
 
 
 def estudantes(request):
-    return render(request, 'estudantes.html')
+    lista = models.Estudante.listar_todos()
+    return render(request, 'estudantes.html', {"lista": lista})
 
 
 def curriculos(request):
-    return render(request, 'lista_curriculos.html')
+    lista = models.Curriculo.listar_todos()
+    return render(request, 'lista_curriculos.html', {"lista": lista})
 
 
 def instituicoes(request):
-    return render(request, 'lista_instituicoes.html')
+    lista = models.Instituicao.listar_todos()
+    return render(request, 'lista_instituicoes.html', {"lista": lista})
 
 
 def projetos_pesquisa(request):
-    return render(request, 'lista_projetos_pesquisa.html')
+    lista = models.ProjetoDePesquisa.listar_todos()
+    return render(request, 'lista_projetos_pesquisa.html', {"lista": lista})
+
 
 def especialidades(request):
-    return render(request, 'lista_especialidades.html')
+    lista = models.Especialidade.listar_todos()
+    return render(request, 'lista_especialidades.html', {"lista": lista})
 
 
 def departamentos(request):
-    return render(request, 'lista_departamentos.html')
+    lista = models.Departamento.listar_todos()
+    return render(request, 'lista_departamentos.html', {"lista": lista})
+
+
+def escolaridades(request):
+    lista = models.Escolaridade.listar_todos()
+    print(lista)
+    return render(request, 'lista_escolaridades.html', {"lista": lista})
+
 
 def cadastro_estudante(request):
     if request.method == 'POST':
@@ -60,6 +76,19 @@ def cadastro_estudante(request):
         form_endereco = forms.EnderecoForm()
         return render(request, 'cadastro_estudante.html', {'form': form, 'form_endereco': form_endereco})
 
+
+def cadastro_professor(request):
+    if request.method == 'POST':
+        form = forms.ProfessorForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            return redirect('professores.html')
+    else:
+        form = forms.ProfessorForm()
+        return render(request, 'cadastro_professor.html', {'form': form})
+
+
 def cadastro_instituicao(request):
     if request.method == 'POST':
         form = forms.InstituicaoForm(request.POST)
@@ -75,6 +104,7 @@ def cadastro_instituicao(request):
         form_endereco = forms.EnderecoForm()
         return render(request, 'cadastro_instituicao.html', {'form': form, 'form_endereco': form_endereco})
 
+
 def cadastro_curriculo(request):
     if request.method == 'POST':
         form = forms.CurriculoForm(request.POST)
@@ -85,6 +115,7 @@ def cadastro_curriculo(request):
     else:
         form = forms.LivroForm()
         return render(request, 'cadastro_curriculo.html', {'form': form})
+
 
 def cadastro_especialidade(request):
     if request.method == 'POST':
@@ -109,6 +140,7 @@ def cadastro_escolaridade(request):
         form = forms.EspecialidadeForm()
     return render(request, 'cadastro_escolaridade.html', {'form': form})
 
+
 def cadastro_livro(request):
     if request.method == 'POST':
         form = forms.LivroForm(request.POST)
@@ -119,6 +151,7 @@ def cadastro_livro(request):
     else:
         form = forms.LivroForm()
         return render(request, 'cadastro_livro.html', {'form': form})
+
 
 def cadastro_projeto_pesquisa(request):
     if request.method == 'POST':
@@ -131,6 +164,7 @@ def cadastro_projeto_pesquisa(request):
         form = forms.ProjetoPesquisaForm()
         return render(request, 'cadastro_livro.html', {'form': form})
 
+
 def cadastro_departamento(request):
     if request.method == 'POST':
         form = forms.DepartamentoForm(request.POST)
@@ -141,6 +175,7 @@ def cadastro_departamento(request):
     else:
         form = forms.DepartamentoForm()
         return render(request, 'cadastro_departamento.html', {'form': form})
+
 
 def cadastro_especialidade(request):
     if request.method == 'POST':
@@ -166,30 +201,22 @@ def cadastro_artigo(request):
         return render(request, 'cadastro_artigo.html', {'form': form})
 
 
-
-@api_view(['POST'])
-@csrf_exempt
-def registrar_estudante(request):
-    Estudante(**request.data).save()
-    return Response(status=200)
+# @api_view(['GET'])
+# def listar_estudantes(request):
+#     return Response(json.dumps(models.Estudante.listar_todos()), status=200)
 
 
-@api_view(['GET'])
-def listar_estudantes(request):
-    return Response(json.dumps(Estudante.listar_todos()), status=200)
+# @api_view(['POST'])
+# def atualizar_estudante(request):
+#     e = models.Estudante.buscar(cpf=request.data['cpf'])
+#     update_dict = dict(request.data)
+#     del update_dict['cpf']
+#     e.atualizar(**update_dict)
+#     return Response(status=200)
 
 
-@api_view(['POST'])
-def atualizar_estudante(request):
-    e = Estudante.buscar(cpf=request.data['cpf'])
-    update_dict = dict(request.data)
-    del update_dict['cpf']
-    e.atualizar(**update_dict)
-    return Response(status=200)
-
-
-@api_view(['DELETE'])
-def remover_estudante(request):
-    e = Estudante.buscar(cpf=request.data['cpf'])
-    e.remover()
-    return Response(status=200)
+# @api_view(['DELETE'])
+# def remover_estudante(request):
+#     e = models.Estudante.buscar(cpf=request.data['cpf'])
+#     e.remover()
+#     return Response(status=200)
