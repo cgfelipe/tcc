@@ -47,6 +47,7 @@ def projetos_pesquisa(request):
 
 def especialidades(request):
     lista = models.Especialidade.listar_todos()
+    print(lista[0].__dict__.keys())
     return render(request, 'lista_especialidades.html', {"lista": lista})
 
 
@@ -199,6 +200,24 @@ def cadastro_artigo(request):
     else:
         form = forms.ArtigoForm()
         return render(request, 'cadastro_artigo.html', {'form': form})
+
+def excluir_escolaridade(request):
+    if request.method == 'DELETE':
+        models.Escolaridade.remover()
+        lista = models.Escolaridade.listar_todos()
+        return redirect(request, 'lista_escolaridades.html', {"lista": lista})
+
+def excluir_especialidade(request):
+    print('request', request)
+    id = request.data.get('id')
+    especialidade = models.Especialidade.buscar(id)
+    especialidade.remover()
+    lista = models.Especialidade.listar_todos()
+    return redirect(request, 'lista_especialidades.html', {"lista": lista})
+
+def atualizar_especialidade(request):
+    return redirect(request)
+
 
 
 # @api_view(['GET'])

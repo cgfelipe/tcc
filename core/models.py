@@ -38,8 +38,8 @@ class Especialidade(models.Model):
     titulo = models.CharField(max_length=50)
 
     @staticmethod
-    def buscar(_titulo):
-        return Especialidade.objects.get(titulo=_titulo)
+    def buscar(_id):
+        return Especialidade.objects.get(id=_id)
 
     @staticmethod
     def listar_todos():
@@ -259,7 +259,7 @@ class Livro(models.Model):
     emprestado = models.BooleanField()
 
     @staticmethod
-    def buscar(titulo):
+    def buscar(_titulo):
         return Livro.objects.get(titulo=_titulo)
 
     @staticmethod
