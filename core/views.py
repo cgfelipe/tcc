@@ -207,17 +207,18 @@ def excluir_escolaridade(request):
         lista = models.Escolaridade.listar_todos()
         return redirect(request, 'lista_escolaridades.html', {"lista": lista})
 
-def excluir_especialidade(request):
+def excluir_especialidade(request, id):
+
     print('request', request)
-    id = request.data.get('id')
-    especialidade = models.Especialidade.buscar(id)
-    especialidade.remover()
+    models.Especialidade.objects.get(id=id).delete()
+    # especialidade = models.Especialidade.buscar(id)
+    # especialidade.remover()
     lista = models.Especialidade.listar_todos()
-    return redirect(request, 'lista_especialidades.html', {"lista": lista})
+    return redirect(request, 'listar_especialidades.html', {"lista": lista})
+
 
 def atualizar_especialidade(request):
     return redirect(request)
-
 
 
 # @api_view(['GET'])
