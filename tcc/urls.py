@@ -64,7 +64,9 @@ urlpatterns = [
         name='cadastro_especialidade'),
     url(r'^excluir_escolaridade', entities_views.excluir_escolaridade,
         name='excluir_escolaridade'),
-    url(r'^excluir_especialidade/(?P<id>\d+)/$', csrf_exempt(entities_views.excluir_especialidade),
+    url(r'^excluir_especialidade/(?P<id>\d+)$', entities_views.excluir_especialidade,
         name='excluir_especialidade'),
+    url(r'^atualizar_especialidade/(?P<id>\d+)/$', entities_views.atualizar_especialidade,
+        name='atualizar_especialidade'),
     url(r'$', admin.site.login, name='login_gui'),
 ]

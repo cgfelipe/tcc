@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title_section %}Atualizar Especialidade{% endblock %}
+
+{% block content %}
+<form class="form-group" method="put" action="{% url 'atualizar_especialidade' %}">
+    {% csrf_token %}
+    <fieldset>
+    </fieldset>
+        <br />
+        <br />
+        <br />
+        <br />
+        {{ form.as_p }}
+    </fieldset>
+    <button type="submit" class="btn btn-lg btn-block btn-success">Alterar Especialidade</button>
+</form>
+
+{% endblock %}

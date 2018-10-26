@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render,  get_object_or_404
 from django.shortcuts import redirect
+from django.contrib import messages
+from django.views.generic.edit import DeleteView
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from core import models
@@ -13,6 +15,11 @@ import json
 
 def index(request):
     return render(request, 'index.html')
+#
+# class EspecialidadeDelete(DeleteView):
+#     print(DeleteView)
+#     model = models.Especialidade.remover()
+#     success_url = reverse_lazy('lista_especialidades')
 
 
 def artigos(request):
@@ -47,7 +54,6 @@ def projetos_pesquisa(request):
 
 def especialidades(request):
     lista = models.Especialidade.listar_todos()
-    print(lista[0].__dict__.keys())
     return render(request, 'lista_especialidades.html', {"lista": lista})
 
 
@@ -208,17 +214,35 @@ def excluir_escolaridade(request):
         return redirect(request, 'lista_escolaridades.html', {"lista": lista})
 
 def excluir_especialidade(request, id):
+    e = get_object_or_404(models.Especialidade, id=id)
+    if request.method == 'POST':
+       e.delete()
+       messages.success(request,
+                         'Especialidade deletada com sucesso')
 
-    print('request', request)
-    models.Especialidade.objects.get(id=id).delete()
-    # especialidade = models.Especialidade.buscar(id)
-    # especialidade.remover()
-    lista = models.Especialidade.listar_todos()
-    return redirect(request, 'listar_especialidades.html', {"lista": lista})
+       return redirect(request, 'lista_especialidades.html')
+
+    return render(request, 'excluir_especialidade.html', {'especialidade': e})
+
+def excluir_artigo(request, id):
+    if request.method == 'POST':
+
+        models.Artigo.objects.get(id=id).delete()
+
+
+    return redirect(request, 'lista_artigos.html')
 
 
 def atualizar_especialidade(request):
-    return redirect(request)
+    if request.method == 'PUT':
+        form = forms.EspecialidadeForm(request.PUT)
+        if form.is_valid():
+            put = form.save()
+            return redirect('lista_especialidades.html')
+    else:
+        form = forms.EspecialidadeForm()
+        return render(request, 'atualizar_especialidade.html', {'form': form})
+
 
 
 # @api_view(['GET'])
