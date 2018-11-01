@@ -8,6 +8,7 @@ from core import models
 from tcc import forms
 import uuid
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render_to_response
 import json
 
 # Create your views here.
@@ -210,39 +211,29 @@ def cadastro_artigo(request):
 def excluir_escolaridade(request):
     if request.method == 'DELETE':
         models.Escolaridade.remover()
-        lista = models.Escolaridade.listar_todos()
-        return redirect(request, 'lista_escolaridades.html', {"lista": lista})
+        return redirect(request, 'lista_escolaridades.html')
 
+#------------------ AQUI FUNCIONANDO
 def excluir_especialidade(request, id):
     e = get_object_or_404(models.Especialidade, id=id)
-    if request.method == 'POST':
-       e.delete()
-       messages.success(request,
-                         'Especialidade deletada com sucesso')
-
-       return redirect(request, 'lista_especialidades.html')
-
-    return render(request, 'excluir_especialidade.html', {'especialidade': e})
+    e.delete()
+    return especialidades(request)
 
 def excluir_artigo(request, id):
+    e = get_object_or_404(models.Artigo, id=id)
+    e.delete()
+    return artigos(request)
+
+def atualizar_especialidade(request, id):
+    e = get_object_or_404(models.Especialidade, id=id)
     if request.method == 'POST':
-
-        models.Artigo.objects.get(id=id).delete()
-
-
-    return redirect(request, 'lista_artigos.html')
-
-
-def atualizar_especialidade(request):
-    if request.method == 'PUT':
-        form = forms.EspecialidadeForm(request.PUT)
+        form = forms.EspecialidadeForm(request.POST, instance=e)
         if form.is_valid():
-            put = form.save()
-            return redirect('lista_especialidades.html')
+            form.save()
+            return especialidades(request)
     else:
-        form = forms.EspecialidadeForm()
-        return render(request, 'atualizar_especialidade.html', {'form': form})
-
+        form = forms.EspecialidadeForm(instance=e)
+    return render_to_response(request, 'atualizar_especialidade.html', {'form': form})
 
 
 # @api_view(['GET'])
