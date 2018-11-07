@@ -3,7 +3,7 @@
 {% block title_section %}Atualizar Especialidade{% endblock %}
 
 {% block content %}
-<form class="form-group" method="put" action="{% url 'atualizar_especialidade' %}">
+<form class="form-group" method="post" action="{% url 'atualizar_especialidade' obj.id %}">
     {% csrf_token %}
     <fieldset>
     </fieldset>
