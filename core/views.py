@@ -124,19 +124,6 @@ def cadastro_curriculo(request):
         form = forms.LivroForm()
         return render(request, 'cadastro_curriculo.html', {'form': form})
 
-
-def cadastro_especialidade(request):
-    if request.method == 'POST':
-        form = forms.EspecialidadeForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.save()
-            return redirect('index')
-    else:
-        form = forms.EspecialidadeForm()
-    return render(request, 'cadastro_especialidade.html', {'form': form})
-
-
 def cadastro_escolaridade(request):
     if request.method == 'POST':
         form = forms.EscolaridadeForm(request.POST)
@@ -185,7 +172,7 @@ def cadastro_departamento(request):
         return render(request, 'cadastro_departamento.html', {'form': form})
 
 
-def cadastro_especialidade(request):
+def cadastro_especialidade(request, form=None):
     if request.method == 'POST':
         form = forms.EspecialidadeForm(request.POST)
         if form.is_valid():
@@ -213,17 +200,19 @@ def excluir_escolaridade(request):
         models.Escolaridade.remover()
         return redirect(request, 'lista_escolaridades.html')
 
-#------------------ AQUI FUNCIONANDO
+#------------------ AQUI FUNCIONANDO -----------------
 def excluir_especialidade(request, id):
     e = get_object_or_404(models.Especialidade, id=id)
     e.delete()
     return especialidades(request)
+#------------------------------------------------------
 
 def excluir_artigo(request, id):
     e = get_object_or_404(models.Artigo, id=id)
     e.delete()
     return artigos(request)
 
+#------------------ AQUI FUNCIONANDO --------------------------------
 def atualizar_especialidade(request, id):
     e = get_object_or_404(models.Especialidade, id=id)
     if request.method == 'POST':
@@ -233,25 +222,7 @@ def atualizar_especialidade(request, id):
             return especialidades(request)
     else:
         form = forms.EspecialidadeForm(instance=e)
-    return render_to_response(request, 'atualizar_especialidade.html', {'form': form})
-
-
-# @api_view(['GET'])
-# def listar_estudantes(request):
-#     return Response(json.dumps(models.Estudante.listar_todos()), status=200)
-
-
-# @api_view(['POST'])
-# def atualizar_estudante(request):
-#     e = models.Estudante.buscar(cpf=request.data['cpf'])
-#     update_dict = dict(request.data)
-#     del update_dict['cpf']
-#     e.atualizar(**update_dict)
-#     return Response(status=200)
-
-
-# @api_view(['DELETE'])
-# def remover_estudante(request):
-#     e = models.Estudante.buscar(cpf=request.data['cpf'])
-#     e.remover()
-#     return Response(status=200)
+        print(form)
+        print(request)
+        return render(request, 'atualizar_especialidade.html', {'form': form, 'obj': e})
+#---------------------------------------------------------------------------------------
