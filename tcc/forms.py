@@ -74,3 +74,9 @@ class ProfessorForm(ModelForm):
     class Meta:
         model = models.Professor
         fields = ['escolaridade', 'inscricao', 'dataAdmissao', 'interino', 'concursado', 'especialidade', 'salario', 'agenciaBancaria', 'contaBancaria', 'projetos']
+
+
+class PessoaForm(ModelForm):
+    class Meta:
+        model = models.Pessoa
+        fields = ['nome', 'nomeMae', 'dataNascimento', 'email', 'telefone', 'endereco', 'usuario', 'senha', 'cpf', 'rg']

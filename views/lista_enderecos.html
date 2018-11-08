@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title_section %}Endereços{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <br />
+      <div class="page-header">
+        <h1>Usuários</h1>
+      </div>
+    </div>
+    <div class="col-sm">
+    </div>
+    <div class="col-sm">
+      <a class="btn btn-primary" role="button" href="{% url 'cadastro_pessoa' %}">Adicionar</a>
+    </div>
+  </div>
+</div>
+
+<br />
+<br />
+<div class="table_responsive">
+  <table id="mytable" class="table table-bordred table-striped">
+
+    <thead>
+      <th>Nome</th>
+      <th>E-mail</th>
+      <th>Telefone</th>
+      <th>Atualizar</th>
+      <th>Remover</th>
+    </thead>
+    <tbody>

@@ -10,28 +10,46 @@ router = routers.DefaultRouter()
 
 urlpatterns = [
     url(r'^admin', entities_views.index, name='index'),
+
+    url(r'^cadastro_pessoa', entities_views.cadastro_pessoa,
+        name='cadastro_pessoa'),
+    url(r'^cadastro_endereco', entities_views.cadastro_endereco,
+        name='cadastro_endereco'),
+
     url(r'^listar_estudante', entities_views.estudantes, name='listar_estudantes'),
     url(r'^cadastro_estudante', entities_views.cadastro_estudante,
         name='cadastro_estudante'),
     url(r'^excluir_estudante/(?P<id>\d+)$', entities_views.excluir_estudante,
         name='excluir_estudante'),
+    url(r'^atualizar_especialidade/(?P<id>\d+)$', entities_views.atualizar_especialidade,
+        name='atualizar_especialidade'),
 
 
     url(r'^listar_professores', entities_views.professores, name='listar_professores'),
     url(r'^cadastro_professor', entities_views.cadastro_professor,
         name='cadastro_professor'),
+    url(r'^excluir_professor/(?P<id>\d+)$', entities_views.excluir_professor,
+        name='excluir_professor'),
+    url(r'^atualizar_especialidade/(?P<id>\d+)$', entities_views.atualizar_especialidade,
+        name='atualizar_especialidade'),
 
 
     url(r'^listar_artigos', entities_views.artigos, name='listar_artigos'),
     url(r'^cadastro_artigo', entities_views.cadastro_artigo,
         name='cadastro_artigo'),
-
+    url(r'^excluir_artigo/(?P<id>\d+)$', entities_views.excluir_artigo,
+        name='excluir_artigo'),
+    url(r'^atualizar_artigo/(?P<id>\d+)$', entities_views.atualizar_artigo,
+        name='atualizar_artigo'),
 
 
     url(r'^listar_livros', entities_views.livros, name='listar_livros'),
     url(r'^cadastro_livro', entities_views.cadastro_livro,
         name='cadastro_livro'),
-
+    url(r'^excluir_livro/(?P<id>\d+)$', entities_views.excluir_livro,
+        name='excluir_livro'),
+    url(r'^atualizar_livro/(?P<id>\d+)$', entities_views.atualizar_livro,
+        name='atualizar_livro'),
 
 
     url(r'^listar_curriculos', entities_views.curriculos,  name='listar_curriculos'),

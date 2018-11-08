@@ -92,13 +92,23 @@ def cadastro_estudante(request):
 def cadastro_professor(request):
     if request.method == 'POST':
         form = forms.ProfessorForm(request.POST)
+        form_endereco = forms.EnderecoForm(request.POST)
+        form_pessoa = forms.PessoaForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
+            post_endereco = form_endereco.save(commit=False)
+            post_endereco.save()
+            post_pessoa = form_pessoa.save(commit=False)
+            post_pessoa.save()
             return redirect('lista_professores.html')
     else:
+        form_pessoa = forms.PessoaForm()
+        form_endereco = forms.EnderecoForm()
         form = forms.ProfessorForm()
-        return render(request, 'cadastro_professor.html', {'form': form})
+        return render(request, 'cadastro_professor.html', {'form': form, 'form_endereco': form_endereco, 'form_pessoa': form_pessoa})
+
+
 
 
 def cadastro_instituicao(request):
@@ -128,13 +138,35 @@ def cadastro_curriculo(request):
         form = forms.LivroForm()
         return render(request, 'cadastro_curriculo.html', {'form': form})
 
+def cadastro_endereco(request):
+    if request.method == 'POST':
+        form = forms.EnderecoForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            return redirect('index.html')
+    else:
+        form = forms.EnderecoForm()
+        return render(request, 'cadastro_endereco.html', {'form': form})
+
+def cadastro_pessoa(request):
+    if request.method == 'POST':
+        form = forms.PessoaForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            return redirect('index.html')
+    else:
+        form = forms.PessoaForm()
+        return render(request, 'cadastro_pessoas.html', {'form': form})
+
 def cadastro_escolaridade(request):
     if request.method == 'POST':
         form = forms.EscolaridadeForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
-            return redirect('index')
+            return redirect('lista_escolaridade.html')
     else:
         form = forms.EspecialidadeForm()
     return render(request, 'cadastro_escolaridade.html', {'form': form})
@@ -216,10 +248,20 @@ def excluir_estudante(request, id):
     e.delete()
     return estudantes(request)
 
+def excluir_professor(request, id):
+    e = get_object_or_404(models.Professor, id=id)
+    e.delete()
+    return professores(request)
+
 def excluir_artigo(request, id):
     e = get_object_or_404(models.Artigo, id=id)
     e.delete()
     return artigos(request)
+
+def excluir_livro(request, id):
+    e = get_object_or_404(models.Livro, id=id)
+    e.delete()
+    return livros(request)
 
 #------------------ AQUI FUNCIONANDO --------------------------------
 def atualizar_especialidade(request, id):
@@ -235,3 +277,49 @@ def atualizar_especialidade(request, id):
         print(request)
         return render(request, 'atualizar_especialidade.html', {'form': form, 'obj': e})
 #---------------------------------------------------------------------------------------
+
+def atualizar_estudante(request, id):
+    e = get_object_or_404(models.Estudante, id=id)
+    if request.method == 'POST':
+        form = forms.EstudanteForm(request.POST, instance=e)
+        if form.is_valid() and form:
+            form.save()
+            return estudantes(request)
+    else:
+        form = forms.EstudanteForm(instance=e)
+        return render(request, 'atualizar_estudante.html', {'form': form, 'obj': e})
+
+def atualizar_professor(request, id):
+    e = get_object_or_404(models.Professor, id=id)
+    if request.method == 'POST':
+        form = forms.ProfessorForm(request.POST, instance=e)
+        if form.is_valid() and form:
+            form.save()
+            return professores(request)
+    else:
+        form = forms.ProfessorForm(instance=e)
+        print(form)
+        print(request)
+        return render(request, 'atualizar_professor.html', {'form': form, 'obj': e})
+
+def atualizar_artigo(request, id):
+    e = get_object_or_404(models.Artigo, id=id)
+    if request.method == 'POST':
+        form = forms.ProfessorForm(request.POST, instance=e)
+        if form.is_valid() and form:
+            form.save()
+            return artigos(request)
+    else:
+        form = forms.ArtigoForm(instance=e)
+        return render(request, 'atualizar_artigo.html', {'form': form, 'obj': e})
+
+def atualizar_livro(request, id):
+    e = get_object_or_404(models.Livro, id=id)
+    if request.method == 'POST':
+        form = forms.LivroForm(request.POST, instance=e)
+        if form.is_valid() and form:
+            form.save()
+            return livros(request)
+    else:
+        form = forms.LivroForm(instance=e)
+        return render(request, 'atualizar_livro.html', {'form': form, 'obj': e})

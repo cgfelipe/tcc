@@ -77,7 +77,7 @@ class Pessoa(Base, models.Model):
     email = models.CharField(max_length=50)
     telefone = models.CharField(max_length=30)
     endereco = models.OneToOneField(
-        Endereco, on_delete=models.CASCADE, null=False, verbose_name='endereço da pessoa')
+        Endereco, on_delete=models.CASCADE, null=True, verbose_name='endereço da pessoa')
     usuario = models.CharField(max_length=20)
     senha = models.CharField(max_length=50)
     cpf = models.CharField(primary_key=True, max_length=11)
