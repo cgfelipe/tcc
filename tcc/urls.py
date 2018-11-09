@@ -21,8 +21,8 @@ urlpatterns = [
         name='cadastro_estudante'),
     url(r'^excluir_estudante/(?P<id>\d+)$', entities_views.excluir_estudante,
         name='excluir_estudante'),
-    url(r'^atualizar_especialidade/(?P<id>\d+)$', entities_views.atualizar_especialidade,
-        name='atualizar_especialidade'),
+    url(r'^atualizar_estudante/(?P<id>\d+)$', entities_views.atualizar_estudante,
+        name='atualizar_estudante'),
 
 
     url(r'^listar_professores', entities_views.professores, name='listar_professores'),

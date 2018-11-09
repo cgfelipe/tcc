@@ -1,5 +1,6 @@
 from django.shortcuts import render,  get_object_or_404
 from django.shortcuts import redirect
+from django.template import RequestContext
 from django.contrib import messages
 from django.views.generic.edit import DeleteView
 from rest_framework.decorators import api_view
@@ -76,17 +77,24 @@ def escolaridades(request):
 def cadastro_estudante(request):
     if request.method == 'POST':
         form = forms.EstudanteForm(request.POST)
-        form_endereco = forms.EnderecoForm(request.POST)
-        if form.is_valid() & form_endereco.is_valid():
+        form_pessoa= forms.PessoaForm(request.POST)
+        print(form_pessoa.errors)
+        if form.is_valid() & form_pessoa.is_valid():
+            # post_endereco = form_endereco.save(commit=False)
+            # post_endereco.save()
+            post_pessoa = form_pessoa.save(commit=False)
+            post_pessoa.save()
             post = form.save(commit=False)
             post.save()
-            post_endereco = form_endereco.save(commit=False)
-            post_endereco.save()
-            return redirect('estudantes.html')
+            return render(request, 'estudantes.html')
+        else:
+            return render(request, 'cadastro_estudante.html',
+                          {'form': form, 'form_pessoa': form_pessoa})
     else:
         form = forms.EstudanteForm()
-        form_endereco = forms.EnderecoForm()
-        return render(request, 'cadastro_estudante.html', {'form': form, 'form_endereco': form_endereco})
+        # form_endereco = forms.EnderecoForm()
+        form_pessoa = forms.PessoaForm()
+        return render(request, 'cadastro_estudante.html', {'form': form, 'form_pessoa': form_pessoa})
 
 
 def cadastro_professor(request):
