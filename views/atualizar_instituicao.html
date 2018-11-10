@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title_section %}Atualizar Instituicao{% endblock %}
+
+{% block content %}
+
+<form class="form-group" method="post" action="{% url 'atualizar_instituicao' obj.id %}">
+    <br />
+    <br />
+    {% csrf_token %}
+    <fieldset>
+        <br />
+        <br />
+        <br />
+        <br />
+        {{ form.as_p }}
+    </fieldset>
+    <fieldset>
+        {{ form_endereco.as_p }}
+    </fieldset>
+    <button type="submit" class="btn btn-lg btn-block btn-success">Atualizar</button>
+</form>
+
+{% endblock %}
