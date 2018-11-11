@@ -73,7 +73,7 @@ class Escolaridade(models.Model):
 class Pessoa(Base, models.Model):
     nome = models.CharField(max_length=200)
     nomeMae = models.CharField(max_length=200)
-    dataNascimento = models.DateField()
+    dataNascimento = models.DateField(null=True)
     email = models.CharField(max_length=50)
     telefone = models.CharField(max_length=30)
     endereco = models.OneToOneField(
@@ -113,6 +113,20 @@ class Professor(Pessoa):
     contaBancaria = models.CharField(max_length=200)
     projetos = models.CharField(max_length=500)
 
+    @staticmethod
+    def buscar(_id):
+        return Professor.objects.get(id=_id)
+
+    @staticmethod
+    def listar_todos():
+        return Professor.objects.all()
+
+    def atualizar(self, **kwargs):
+        return self.update(**kwargs)
+
+    def remover(self, **kwargs):
+        return self.delete()
+
 
 class Estudante(Pessoa):
     matricula = models.CharField(primary_key=True, max_length=11)
@@ -126,6 +140,20 @@ class Estudante(Pessoa):
     bolsa = models.FloatField()
     agenciaBancaria = models.CharField(max_length=200)
     contaBancaria = models.CharField(max_length=200)
+
+    @staticmethod
+    def buscar(_id):
+        return Estudante.objects.get(id=_id)
+
+    @staticmethod
+    def listar_todos():
+        return Estudante.objects.all()
+
+    def atualizar(self, **kwargs):
+        return self.update(**kwargs)
+
+    def remover(self, **kwargs):
+        return self.delete()
 
 
 class Curso(models.Model):

@@ -16,7 +16,7 @@
     <div class="col-sm">
     </div>
     <div class="col-sm">
-        <button type="button" role="button" class="btn btn-primary"><a href="{% url 'cadastro_estudante' %}">Adicionar</a></button>
+        <a class="btn btn-primary" role="button" href="{% url 'cadastro_estudante' %}">Adicionar</a>
     </div>
   </div>
 </div>
@@ -27,28 +27,54 @@
        <table id="mytable" class="table table-bordred table-striped">
 
                    <thead>
-
-                   <th><input type="checkbox" id="checkall" /></th>
                    <th>Matrícula</th>
                     <th>Nome</th>
                      <th>Telefone</th>
                      <th>Email</th>
 
                        <th>Remover</th>
+                   <th>Atualizar</th>
                    </thead>
     <tbody>
 
      {% for e in lista %}
 
         <tr>
-    <td><input type="checkbox" class="checkthis" /></td>
+
     <td>{{e.matricula}}</td>
     <td>{{e.nome}}</td>
     <td>{{e.telefone}}</td>
     <td>{{e.email}}</td>
     <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-    <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete{{ e.id }}" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
-    </tr>
+    <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete"
+                                                                               data-toggle="modal" data-target="#delete{{ e.id }}"><span class="glyphicon glyphicon-trash"></span></button></p>
+        </tr>
+
+            <div class="modal fade" id="delete{{ e.id }}" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove"
+                    aria-hidden="true"></span></button>
+                <h4 class="modal-title custom_align" id="Heading">Remover</h4>
+              </div>
+              <div class="modal-body">
+
+                <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Você tem certeza disso?</div>
+
+              </div>
+              <form class="form-group" method="post" action="{% url 'excluir_estudante' e.id %}">
+                  {% csrf_token %}
+                  <div class="modal-footer ">
+                      <button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-ok-sign"></span> Sim</button>
+                      <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Não</button>
+                </div>
+              </form>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
 
     <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
       <div class="modal-dialog">
@@ -79,34 +105,6 @@
   </div>
       <!-- /.modal-dialog -->
     </div>
-
-
-
-    <div class="modal fade" id="delete{{ o.id }}" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-      <div class="modal-dialog">
-    <div class="modal-content">
-          <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-        <h4 class="modal-title custom_align" id="Heading">Remover</h4>
-      </div>
-          <div class="modal-body">
-
-       <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Você tem certeza disso?</div>
-
-      </div>
-        <form class="form-group" method="post" action="{% url 'excluir_estudante' e.id %}">
-                  {% csrf_token %}
-                  <div class="modal-footer ">
-                      <button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-ok-sign"></span> Sim</button>
-                      <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Não</button>
-                </div>
-              </form>
-        </div>
-    <!-- /.modal-content -->
-  </div>
-      <!-- /.modal-dialog -->
-    </div>
-
 
 
       {% endfor %}

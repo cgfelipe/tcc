@@ -30,8 +30,8 @@ urlpatterns = [
         name='cadastro_professor'),
     url(r'^excluir_professor/(?P<id>\d+)$', entities_views.excluir_professor,
         name='excluir_professor'),
-    url(r'^atualizar_especialidade/(?P<id>\d+)$', entities_views.atualizar_especialidade,
-        name='atualizar_especialidade'),
+    url(r'^atualizar_professor/(?P<id>\d+)$', entities_views.atualizar_professor,
+        name='atualizar_professor'),
 
 
     url(r'^listar_artigos', entities_views.artigos, name='listar_artigos'),
