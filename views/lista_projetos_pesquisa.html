@@ -108,10 +108,13 @@
           disso?</div>
 
       </div>
-      <div class="modal-footer ">
-        <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> Sim</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Não</button>
-      </div>
+      <form class="form-group" method="post" action="{% url 'excluir_projeto_pesquisa' o.id %}">
+        {% csrf_token %}
+        <div class="modal-footer ">
+          <button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-ok-sign"></span> Sim</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Não</button>
+        </div>
+      </form>
     </div>
     <!-- /.modal-content -->
   </div>

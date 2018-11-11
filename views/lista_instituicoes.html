@@ -5,109 +5,127 @@
 {% block content %}
 
 <div class="container">
-  <div class="row">
-    <div class="col-sm">
-      <br />
-      <div class="page-header">
-        <h1>Instituicoes</h1>
-      </div>
+    <div class="row">
+        <div class="col-sm">
+            <br/>
+            <div class="page-header">
+                <h1>Instituicoes</h1>
+            </div>
+        </div>
+        <div class="col-sm">
+        </div>
+        <div class="col-sm">
+            <button type="button" class="btn btn-primary"><a href="{% url 'cadastro_instituicao' %}">Adicionar</a>
+            </button>
+        </div>
     </div>
-    <div class="col-sm">
-    </div>
-    <div class="col-sm">
-      <button type="button" class="btn btn-primary"><a href="{% url 'cadastro_instituicao' %}">Adicionar</a></button>
-    </div>
-  </div>
 </div>
 
-<br />
-<br />
+<br/>
+<br/>
 <div class="table_responsive">
-  <table id="mytable" class="table table-bordred table-striped">
+    <table id="mytable" class="table table-bordred table-striped">
 
-    <thead>
-      <th>Nome</th>
-      <th>CNPJ</th>
-      <th>Telefone</th>
-      <th>Atualizar</th>
-      <th>Remover</th>
-    </thead>
-    <tbody>
+        <thead>
+        <th>Nome</th>
+        <th>CNPJ</th>
+        <th>Telefone</th>
+        <th>Atualizar</th>
+        <th>Remover</th>
+        </thead>
+        <tbody>
 
-      {% for o in lista %}
-      <tr class="{% cycle 'row1' 'row2' %}">
-        <td>{{o.nome}}</td>
-        <td>{{o.cnpj}}</td>
-        <td>{{o.telefone}}</td>
-        <td>
-          <p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit"
-              data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p>
-        </td>
-        <td>
-          <p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete"
-              data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button></p>
-        </td>
-      </tr>
-      {% endfor %}
+        {% for o in lista %}
+        <tr class="{% cycle 'row1' 'row2' %}">
+            <td>{{o.nome}}</td>
+            <td>{{o.cnpj}}</td>
+            <td>{{o.telefone}}</td>
+            <td>
+                <p data-placement="top" data-toggle="tooltip" title="Edit">
+                    <button class="btn btn-primary btn-xs" data-title="Edit"
+                            data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span>
+                    </button>
+                </p>
+            </td>
+            <td>
+                <p data-placement="top" data-toggle="tooltip" title="Delete">
+                    <button class="btn btn-danger btn-xs" data-title="Delete"
+                            data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span>
+                    </button>
+                </p>
+            </td>
+        </tr>
+        {% endfor %}
 
-    </tbody>
-  </table>
+        </tbody>
+    </table>
 </div>
 
 <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove"
-            aria-hidden="true"></span></button>
-        <h4 class="modal-title custom_align" id="Heading">Edite o Aluno</h4>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <input class="form-control " type="text" placeholder="Mohsin">
-        </div>
-        <div class="form-group">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                        class="glyphicon glyphicon-remove"
+                        aria-hidden="true"></span></button>
+                <h4 class="modal-title custom_align" id="Heading">Edite o Aluno</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input class="form-control " type="text" placeholder="Mohsin">
+                </div>
+                <div class="form-group">
 
-          <input class="form-control " type="text" placeholder="Irshad">
-        </div>
-        <div class="form-group">
-          <textarea rows="2" class="form-control" placeholder="CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan"></textarea>
+                    <input class="form-control " type="text" placeholder="Irshad">
+                </div>
+                <div class="form-group">
+                    <textarea rows="2" class="form-control"
+                              placeholder="CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan"></textarea>
 
 
+                </div>
+            </div>
+            <div class="modal-footer ">
+                <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span
+                        class="glyphicon glyphicon-ok-sign"></span> Atualizar
+                </button>
+            </div>
         </div>
-      </div>
-      <div class="modal-footer ">
-        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Atualizar</button>
-      </div>
+        <!-- /.modal-content -->
     </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
+    <!-- /.modal-dialog -->
 </div>
 
 
-
 <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove"
-            aria-hidden="true"></span></button>
-        <h4 class="modal-title custom_align" id="Heading">Remover</h4>
-      </div>
-      <div class="modal-body">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                        class="glyphicon glyphicon-remove"
+                        aria-hidden="true"></span></button>
+                <h4 class="modal-title custom_align" id="Heading">Remover</h4>
+            </div>
+            <div class="modal-body">
 
-        <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Você tem certeza
-          disso?</div>
+                <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Você tem certeza
+                    disso?
+                </div>
 
-      </div>
-      <div class="modal-footer ">
-        <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> Sim</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Não</button>
-      </div>
+            </div>
+            <form class="form-group" method="post" action="{% url 'excluir_instituicao' o.id %}">
+                {% csrf_token %}
+                <div class="modal-footer ">
+                    <button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-ok-sign"></span> Sim
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><span
+                            class="glyphicon glyphicon-remove"></span> Não
+                    </button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
     </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
+    <!-- /.modal-dialog -->
 </div>
 {% endblock %}
