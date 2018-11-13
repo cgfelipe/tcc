@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<form class="form-group" method="post" action="{% url 'atualizar_instituicao' obj.id %}">
+<form class="form-group" method="post" action="{% url 'atualizar_instituicao' obj.cnpj %}">
     <br />
     <br />
     {% csrf_token %}

@@ -95,7 +95,10 @@ def cadastro_instituicao(request):
             post.save()
             post_endereco = form_endereco.save(commit=False)
             post_endereco.save()
-            return redirect('lista_instituicoes.html')
+            return redirect('listar_instituicoes')
+        else:
+            return render(request, 'cadastro_instituicao.html',
+                          {'form': form})
     else:
         form = forms.InstituicaoForm()
         form_endereco = forms.EnderecoForm()
@@ -107,9 +110,12 @@ def cadastro_curriculo(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
-            return redirect('lista_curriculos.html')
+            return redirect('listar_curriculos')
+        else:
+            return render(request, 'cadastro_curriculo.html',
+                          {'form': form})
     else:
-        form = forms.LivroForm()
+        form = forms.CurriculoForm()
         return render(request, 'cadastro_curriculo.html', {'form': form})
 
 def cadastro_endereco(request):
@@ -125,6 +131,20 @@ def cadastro_endereco(request):
     else:
         form = forms.EnderecoForm()
         return render(request, 'cadastro_endereco.html', {'form': form})
+
+def cadastro_curso(request):
+    if request.method == 'POST':
+        form = forms.CursoForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            return redirect('index')
+        else:
+            return render(request, 'cadastro_curso.html',
+                          {'form': form})
+    else:
+        form = forms.CursoForm()
+        return render(request, 'cadastro_curso.html', {'form': form})
 
 def cadastro_pessoa(request):
     if request.method == 'POST':
@@ -172,9 +192,12 @@ def cadastro_projeto_pesquisa(request):
             post = form.save(commit=False)
             post.save()
             return redirect('listar_projetos_pesquisa')
+        else:
+            return render(request, 'cadastro_projeto_pesquisa.html',
+                          {'form': form})
     else:
         form = forms.ProjetoPesquisaForm()
-        return render(request, 'cadastro_livro.html', {'form': form})
+        return render(request, 'cadastro_projeto_pesquisa.html', {'form': form})
 
 def cadastro_departamento(request):
     if request.method == 'POST':
@@ -182,7 +205,10 @@ def cadastro_departamento(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
-            return redirect('lista_departamentos.html')
+            return redirect('listar_departamentos')
+        else:
+            return render(request, 'cadastro_departamento.html',
+                          {'form': form})
     else:
         form = forms.DepartamentoForm()
         return render(request, 'cadastro_departamento.html', {'form': form})
@@ -249,8 +275,8 @@ def excluir_departamento(request, id):
     e.delete()
     return departamentos(request)
 
-def excluir_instituicao(request, id):
-    e = get_object_or_404(models.Instituicao, id=id)
+def excluir_instituicao(request, cnpj):
+    e = get_object_or_404(models.Instituicao, cnpj=cnpj)
     e.delete()
     return instituicoes(request)
 
@@ -345,15 +371,15 @@ def atualizar_departamento(request, id):
         form = forms.DepartamentoForm(instance=e)
         return render(request, 'atualizar_departamento.html', {'form': form, 'obj': e})
 
-def atualizar_instituicao(request, id):
-    e = get_object_or_404(models.Instituicao, id=id)
+def atualizar_instituicao(request, cnpj):
+    e = get_object_or_404(models.Instituicao, cnpj=cnpj)
     if request.method == 'POST':
         form = forms.InstituicaoForm(request.POST, instance=e)
         if form.is_valid():
             form.save()
             return instituicoes(request)
     else:
-        form = forms.EspecialidadeForm(instance=e)
+        form = forms.InstituicaoForm(instance=e)
         return render(request, 'atualizar_instituicao.html', {'form': form, 'obj': e})
 
 def atualizar_projeto_pesquisa(request, id):

@@ -8,6 +8,11 @@ class EspecialidadeForm(ModelForm):
         model = models.Especialidade
         fields = ['titulo']
 
+class CursoForm(ModelForm):
+    class Meta:
+        model = models.Curso
+        fields = ['nome_curso']
+
 
 class EscolaridadeForm(ModelForm):
     class Meta:

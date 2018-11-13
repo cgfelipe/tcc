@@ -5,6 +5,7 @@
     <title>Universidade | {% block title_section %}{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'assets/bootstrap.min.css' %}" media="screen" />
     <link rel="stylesheet" href="{% static 'assets/custom.min.css' %}" media="screen" />
+    <link rel="stylesheet" href="{% static 'assets/fonts' %}" media="screen" />
     <script>
         $(document).ready(function () {
             $('input, textarea, select').addClass('form-control');
@@ -53,6 +54,9 @@
               </li>
               <li>
                 <a href="{% url 'cadastro_pessoa' %}">Pessoas</a>
+              </li>
+                <li>
+                <a href="{% url 'cadastro_curso' %}">Cursos</a>
               </li>
             </ul>
           </li>

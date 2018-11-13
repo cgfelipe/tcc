@@ -20,6 +20,9 @@ class Endereco(Base, models.Model):
     estado = models.CharField(max_length=2)
     pais = models.CharField(max_length=30)
 
+    def __str__(self):
+        return self.logradouro
+
     @staticmethod
     def buscar(_cep, _numero):
         return Endereco.objects.get(cep=_cep, numero=_numero)
@@ -38,6 +41,9 @@ class Endereco(Base, models.Model):
 class Especialidade(models.Model):
     titulo = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.titulo
+
     @staticmethod
     def buscar(_id):
         return Especialidade.objects.get(id=_id)
@@ -55,6 +61,9 @@ class Especialidade(models.Model):
 
 class Escolaridade(models.Model):
     titulo = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.titulo
 
     @staticmethod
     def buscar(_titulo):
@@ -82,6 +91,9 @@ class Pessoa(Base, models.Model):
     senha = models.CharField(max_length=50)
     cpf = models.CharField(unique=True, max_length=11)
     rg = models.CharField(max_length=8)
+
+    def __str__(self):
+        return self.nome
 
     @classmethod
     def buscar(cls, cpf):
@@ -113,6 +125,9 @@ class Professor(Pessoa):
     contaBancaria = models.CharField(max_length=200)
     projetos = models.CharField(max_length=500)
 
+    def __str__(self):
+        return self.nome
+
     @staticmethod
     def buscar(_id):
         return Professor.objects.get(id=_id)
@@ -141,6 +156,9 @@ class Estudante(Pessoa):
     agenciaBancaria = models.CharField(max_length=200)
     contaBancaria = models.CharField(max_length=200)
 
+    def __str__(self):
+        return self.matricula
+
     @staticmethod
     def buscar(_id):
         return Estudante.objects.get(id=_id)
@@ -157,10 +175,29 @@ class Estudante(Pessoa):
 
 
 class Curso(models.Model):
-    pass
+    id = models.AutoField(primary_key=True)
+    nome_curso = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.nome_curso
+
+    @staticmethod
+    def buscar(_id):
+        return Curso.objects.get(id=id)
+
+    @staticmethod
+    def listar_todos():
+        return Curso.objects.all()
+
+    def atualizar(self, **kwargs):
+        return self.update(**kwargs)
+
+    def remover(self, **kwargs):
+        return self.delete()
 
 
 class Departamento(models.Model):
+    id = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=200)
     dataFundacao = models.DateField()
     diretor = models.OneToOneField(
@@ -168,7 +205,10 @@ class Departamento(models.Model):
     )
     quantidadeSalas = models.IntegerField()
     rendaAnual = models.FloatField()
-    cursos = models.ManyToManyField(to=Curso)
+    cursos = models.ManyToManyField(to=Curso, null=False)
+
+    def __str__(self):
+        return self.nome
 
     @staticmethod
     def buscar(_nome):
@@ -186,6 +226,7 @@ class Departamento(models.Model):
 
 
 class Curriculo(Base, models.Model):
+    id = models.AutoField(primary_key=True)
     objetivo = models.CharField(max_length=500)
     pessoa = models.OneToOneField(
         Pessoa, on_delete=models.CASCADE, null=False, verbose_name='responsavel do curriculo')
@@ -286,6 +327,7 @@ class Livro(models.Model):
         to=Estudante, on_delete=models.CASCADE, null=False, verbose_name='estudante que usa o livro')
     emprestado = models.BooleanField()
 
+
     @staticmethod
     def buscar(_titulo):
         return Livro.objects.get(titulo=_titulo)
@@ -302,6 +344,7 @@ class Livro(models.Model):
 
 
 class ProjetoDePesquisa(models.Model):
+    id = models.AutoField(primary_key=True)
     idLattes = models.CharField(max_length=100)
     titulo = models.CharField(max_length=200)
     inicio = models.DateField()
@@ -310,10 +353,10 @@ class ProjetoDePesquisa(models.Model):
     valorProjeto = models.FloatField()
     situacao = models.CharField(max_length=200)
     alunos = models.CharField(max_length=200)
-    professor = models.OneToOneField(
-        Professor, on_delete=models.CASCADE, null=False, verbose_name='professor orientador')
-    departamentoResponsavel = models.OneToOneField(
-        Departamento, on_delete=models.CASCADE, null=False, verbose_name='departamento responsavel')
+    professor = models.ForeignKey(
+        to=Professor, on_delete=models.CASCADE, null=False, verbose_name='professor orientador')
+    departamentoResponsavel = models.ForeignKey(
+        to=Departamento, on_delete=models.CASCADE, null=False, verbose_name='departamento responsavel')
 
     @staticmethod
     def buscar(_idLattes):

@@ -15,6 +15,8 @@ urlpatterns = [
         name='cadastro_pessoa'),
     url(r'^cadastro_endereco', entities_views.cadastro_endereco,
         name='cadastro_endereco'),
+    url(r'^cadastro_curso', entities_views.cadastro_curso,
+        name='cadastro_curso'),
 
     url(r'^listar_estudante', entities_views.estudantes, name='listar_estudantes'),
     url(r'^cadastro_estudante', entities_views.cadastro_estudante,
@@ -64,9 +66,9 @@ urlpatterns = [
         name='listar_instituicoes'),
     url(r'^cadastro_instituicao', entities_views.cadastro_instituicao,
         name='cadastro_instituicao'),
-    url(r'^excluir_instituicao/(?P<id>\d+)$', entities_views.excluir_instituicao,
+    url(r'^excluir_instituicao/(?P<cnpj>\d+)$', entities_views.excluir_instituicao,
         name='excluir_instituicao'),
-    url(r'^atualizar_instituicao/(?P<id>\d+)$', entities_views.atualizar_instituicao,
+    url(r'^atualizar_instituicao/(?P<cnpj>\d+)$', entities_views.atualizar_instituicao,
         name='atualizar_instituicao'),
 
 
@@ -74,15 +76,17 @@ urlpatterns = [
         name='listar_projetos_pesquisa'),
     url(r'^cadastro_projeto_pesquisa', entities_views.cadastro_projeto_pesquisa,
         name='cadastro_projeto_pesquisa'),
-    url(r'^excluir_projeto_pesquisa', entities_views.excluir_projeto_pesquisa,
+    url(r'^excluir_projeto_pesquisa/(?P<id>\d+)$', entities_views.excluir_projeto_pesquisa,
         name='excluir_projeto_pesquisa'),
+    url(r'^atualizar_projeto_pesquisa/(?P<id>\d+)$', entities_views.atualizar_instituicao,
+        name='atualizar_projeto_pesquisa'),
 
 
     url(r'^listar_departamentos', entities_views.departamentos,
         name='listar_departamentos'),
     url(r'^cadastro_departamento', entities_views.cadastro_departamento,
         name='cadastro_departamento'),
-    url(r'^excluir_departamento/(?P<id>\d+)$', entities_views.excluir_departamento,
+    url(r'^excluir_departamento/(?P<id>\d*)$', entities_views.excluir_departamento,
         name='excluir_departamento'),
     url(r'^atualizar_departamento/(?P<id>\d+)$', entities_views.atualizar_departamento,
         name='atualizar_departamento'),
