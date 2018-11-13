@@ -9,6 +9,7 @@ class Base(object):
 
 
 class Endereco(Base, models.Model):
+    id = models.AutoField(primary_key=True)
     cep = models.CharField(max_length=10)
     logradouro = models.CharField(max_length=50)
     numero = models.CharField(max_length=10)
@@ -53,7 +54,7 @@ class Especialidade(models.Model):
 
 
 class Escolaridade(models.Model):
-    titulo = models.CharField(max_length=20)
+    titulo = models.CharField(max_length=30)
 
     @staticmethod
     def buscar(_titulo):
@@ -76,11 +77,10 @@ class Pessoa(Base, models.Model):
     dataNascimento = models.DateField(null=True)
     email = models.CharField(max_length=50)
     telefone = models.CharField(max_length=30)
-    endereco = models.OneToOneField(
-        Endereco, on_delete=models.CASCADE, null=True, verbose_name='endereço da pessoa')
+    endereco = models.ForeignKey(to=Endereco, on_delete=models.CASCADE, verbose_name="Endereço", null=True)
     usuario = models.CharField(max_length=20)
     senha = models.CharField(max_length=50)
-    cpf = models.CharField(primary_key=True, max_length=11)
+    cpf = models.CharField(unique=True, max_length=11)
     rg = models.CharField(max_length=8)
 
     @classmethod
@@ -99,8 +99,8 @@ class Pessoa(Base, models.Model):
 
 
 class Professor(Pessoa):
-    escolaridade = models.OneToOneField(
-        Escolaridade, on_delete=models.CASCADE, null=False, verbose_name='escolaridade do professor')
+    escolaridade = models.ForeignKey(
+        to=Escolaridade, on_delete=models.CASCADE, null=False, verbose_name='escolaridade do professor')
     inscricao = models.CharField(max_length=10, null=False)
     dataAdmissao = models.DateField(null=False)
     interino = models.BooleanField(null=False)
@@ -129,9 +129,9 @@ class Professor(Pessoa):
 
 
 class Estudante(Pessoa):
-    matricula = models.CharField(primary_key=True, max_length=11)
-    escolaridade = models.OneToOneField(
-        Escolaridade, on_delete=models.CASCADE, null=False, verbose_name='escolaridade do aluno')
+    matricula = models.CharField(unique=True, max_length=11)
+    escolaridade = models.ForeignKey(
+        to=Escolaridade, on_delete=models.CASCADE, null=False, verbose_name='escolaridade do aluno')
     dataMatricula = models.DateField()
     dataColacao = models.DateField()
     usosRestauranteUniversitario = models.IntegerField()
@@ -193,8 +193,8 @@ class Curriculo(Base, models.Model):
     pretensaoSalarial = models.FloatField()
     ultimaAtualizacao = models.DateField()
     titulo = models.CharField(max_length=30)
-    endereco = models.OneToOneField(
-        Endereco, on_delete=models.CASCADE, null=False, verbose_name='endereco do curriculo')
+    endereco = models.ForeignKey(
+        to=Endereco, on_delete=models.CASCADE, null=False, verbose_name='endereco do curriculo')
     experiencia = models.CharField(max_length=500)
     competencias = models.CharField(max_length=500)
     formacoes = models.CharField(max_length=500)

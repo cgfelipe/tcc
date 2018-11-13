@@ -67,13 +67,16 @@ class ProjetoPesquisaForm(ModelForm):
 class EstudanteForm(ModelForm):
     class Meta:
         model = models.Estudante
-        fields = ['matricula', 'escolaridade', 'dataMatricula', 'dataColacao', 'usosRestauranteUniversitario', 'coeficienteRendimento', 'bolsista', 'bolsa', 'agenciaBancaria', 'contaBancaria']
+        fields = ['nome', 'nomeMae', 'dataNascimento', 'email', 'telefone', 'endereco', 'usuario', 'senha', 'cpf', 'rg',
+                  'matricula', 'escolaridade', 'dataMatricula', 'dataColacao', 'usosRestauranteUniversitario', 'coeficienteRendimento', 'bolsista', 'bolsa', 'agenciaBancaria', 'contaBancaria']
 
 
 class ProfessorForm(ModelForm):
     class Meta:
         model = models.Professor
-        fields = ['escolaridade', 'inscricao', 'dataAdmissao', 'interino', 'concursado', 'especialidade', 'salario', 'agenciaBancaria', 'contaBancaria', 'projetos']
+        fields = [ 'nome', 'nomeMae', 'dataNascimento', 'email', 'telefone', 'endereco', 'usuario', 'senha', 'cpf', 'rg',
+            'escolaridade', 'inscricao', 'dataAdmissao', 'interino', 'concursado', 'especialidade', 'salario', 'agenciaBancaria', 'contaBancaria', 'projetos']
+
 
 
 class PessoaForm(ModelForm):

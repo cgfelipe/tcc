@@ -19,9 +19,9 @@ urlpatterns = [
     url(r'^listar_estudante', entities_views.estudantes, name='listar_estudantes'),
     url(r'^cadastro_estudante', entities_views.cadastro_estudante,
         name='cadastro_estudante'),
-    url(r'^excluir_estudante/(?P<id>\d+)$', entities_views.excluir_estudante,
+    url(r'^excluir_estudante/(?P<pessoa_ptr_id>\d*)$', entities_views.excluir_estudante,
         name='excluir_estudante'),
-    url(r'^atualizar_estudante/(?P<id>\d+)$', entities_views.atualizar_estudante,
+    url(r'^atualizar_estudante/(?P<id>\d*)$', entities_views.atualizar_estudante,
         name='atualizar_estudante'),
 
 
@@ -102,9 +102,11 @@ urlpatterns = [
         name='listar_escolaridades'),
     url(r'^cadastro_escolaridade', entities_views.cadastro_escolaridade,
         name='cadastro_escolaridade'),
-    url(r'^excluir_escolaridade', entities_views.excluir_escolaridade,
+    url(r'^excluir_escolaridade/(?P<id>\d+)$', entities_views.excluir_escolaridade,
         name='excluir_escolaridade'),
+    url(r'^atualizar_escolaridade/(?P<id>\d+)$', entities_views.atualizar_escolaridade,
+        name='atualizar_escolaridade'),
 
 
-    url(r'$', admin.site.login, name='login_gui'),
+    url(r'^$', admin.site.login, name='login_gui'),
 ]

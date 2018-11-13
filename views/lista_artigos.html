@@ -15,7 +15,7 @@
         <div class="col-sm">
         </div>
         <div class="col-sm">
-            <button type="button" class="btn btn-primary"><a href="{% url 'cadastro_artigo' %}">Adicionar</a></button>
+            <a class="btn btn-primary" role="button" href="{% url 'cadastro_artigo' %}">Adicionar</a>
         </div>
     </div>
 </div>
@@ -45,7 +45,7 @@
             <tr class="{% cycle 'row1' 'row2' %}">
                 <td>{{o.titulo}}</td>
                 <td>{{o.data}}</td>
-                <td>{{o.estudante}}</td>
+                <td>{{o.estudante.nome}}</td>
                 <td>{{o.nota}}</td>
                 <td>
                     <p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs"

@@ -55,50 +55,36 @@ def departamentos(request):
 
 def escolaridades(request):
     lista = models.Escolaridade.listar_todos()
-    print(lista)
     return render(request, 'lista_escolaridades.html', {"lista": lista})
 
 #------------------ CADASTRO DE ITENS -----------------
 def cadastro_estudante(request):
     if request.method == 'POST':
         form = forms.EstudanteForm(request.POST)
-        form_pessoa= forms.PessoaForm(request.POST)
-        print(form_pessoa.errors)
-        if form.is_valid() & form_pessoa.is_valid():
-            # post_endereco = form_endereco.save(commit=False)
-            # post_endereco.save()
-            post_pessoa = form_pessoa.save(commit=False)
-            post_pessoa.save()
+        if form.is_valid():
             post = form.save(commit=False)
             post.save()
-            return render(request, 'estudantes.html')
+            return redirect('listar_estudantes')
         else:
             return render(request, 'cadastro_estudante.html',
-                          {'form': form, 'form_pessoa': form_pessoa})
+                          {'form': form})
     else:
         form = forms.EstudanteForm()
-        # form_endereco = forms.EnderecoForm()
-        form_pessoa = forms.PessoaForm()
-        return render(request, 'cadastro_estudante.html', {'form': form, 'form_pessoa': form_pessoa})
+        return render(request, 'cadastro_estudante.html', {'form': form})
 
 def cadastro_professor(request):
     if request.method == 'POST':
         form = forms.ProfessorForm(request.POST)
-        form_endereco = forms.EnderecoForm(request.POST)
-        form_pessoa = forms.PessoaForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
-            post_endereco = form_endereco.save(commit=False)
-            post_endereco.save()
-            post_pessoa = form_pessoa.save(commit=False)
-            post_pessoa.save()
-            return redirect('lista_professores.html')
+            return redirect('listar_professores')
+        else:
+            return render(request, 'cadastro_professor.html',
+                          {'form': form})
     else:
-        form_pessoa = forms.PessoaForm()
-        form_endereco = forms.EnderecoForm()
         form = forms.ProfessorForm()
-        return render(request, 'cadastro_professor.html', {'form': form, 'form_endereco': form_endereco, 'form_pessoa': form_pessoa})
+        return render(request, 'cadastro_professor.html', {'form': form})
 
 def cadastro_instituicao(request):
     if request.method == 'POST':
@@ -148,16 +134,16 @@ def cadastro_pessoa(request):
         form = forms.PessoaForm()
         return render(request, 'cadastro_pessoas.html', {'form': form})
 
-def cadastro_escolaridade(request):
+def cadastro_escolaridade(request, form=None):
     if request.method == 'POST':
         form = forms.EscolaridadeForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
-            return redirect('lista_escolaridade.html')
+            return redirect('listar_escolaridades.html')
     else:
-        form = forms.EspecialidadeForm()
-    return render(request, 'cadastro_escolaridade.html', {'form': form})
+        form = forms.EscolaridadeForm()
+        return render(request, 'cadastro_escolaridade.html', {'form': form})
 
 def cadastro_livro(request):
     if request.method == 'POST':
@@ -165,7 +151,7 @@ def cadastro_livro(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
-            return redirect('lista_livros.html')
+            return redirect('listar_livros')
     else:
         form = forms.LivroForm()
         return render(request, 'cadastro_livro.html', {'form': form})
@@ -176,7 +162,7 @@ def cadastro_projeto_pesquisa(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
-            return redirect('lista_projetos_pesquisa.html')
+            return redirect('listar_projetos_pesquisa')
     else:
         form = forms.ProjetoPesquisaForm()
         return render(request, 'cadastro_livro.html', {'form': form})
@@ -209,15 +195,11 @@ def cadastro_artigo(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
-            return redirect('lista_artigos.html')
+            return redirect('listar_artigos.html')
     else:
         form = forms.ArtigoForm()
         return render(request, 'cadastro_artigo.html', {'form': form})
 
-def excluir_escolaridade(request):
-    if request.method == 'DELETE':
-        models.Escolaridade.remover()
-        return redirect(request, 'lista_escolaridades.html')
 
 #------------------ EXCLUSAO DE ITENS -----------------
 def excluir_especialidade(request, id):
@@ -225,8 +207,13 @@ def excluir_especialidade(request, id):
     e.delete()
     return especialidades(request)
 
-def excluir_estudante(request, id):
-    e = get_object_or_404(models.Estudante, id=id)
+def excluir_escolaridade(request, id):
+    e = get_object_or_404(models.Escolaridade, id=id)
+    e.delete()
+    return escolaridades(request)
+
+def excluir_estudante(request, pessoa_ptr_id):
+    e = get_object_or_404(models.Estudante, pessoa_ptr_id=pessoa_ptr_id)
     e.delete()
     return estudantes(request)
 
@@ -276,6 +263,18 @@ def atualizar_especialidade(request, id):
     else:
         form = forms.EspecialidadeForm(instance=e)
         return render(request, 'atualizar_especialidade.html', {'form': form, 'obj': e})
+
+
+def atualizar_escolaridade(request, id):
+    e = get_object_or_404(models.Escolaridade, id=id)
+    if request.method == 'POST':
+        form = forms.EscolaridadeForm(request.POST, instance=e)
+        if form.is_valid():
+            form.save()
+            return escolaridades(request)
+    else:
+        form = forms.EscolaridadeForm(instance=e)
+        return render(request, 'atualizar_escolaridade.html', {'form': form, 'obj': e})
 
 def atualizar_estudante(request, id):
     e = get_object_or_404(models.Estudante, id=id)
