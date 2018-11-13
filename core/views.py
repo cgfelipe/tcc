@@ -118,7 +118,10 @@ def cadastro_endereco(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
-            return redirect('index.html')
+            return redirect('index')
+        else:
+            return render(request, 'cadastro_endereco.html',
+                          {'form': form})
     else:
         form = forms.EnderecoForm()
         return render(request, 'cadastro_endereco.html', {'form': form})
@@ -129,7 +132,10 @@ def cadastro_pessoa(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
-            return redirect('index.html')
+            return redirect('index')
+        else:
+            return render(request, 'cadastro_pessoas.html',
+                          {'form': form})
     else:
         form = forms.PessoaForm()
         return render(request, 'cadastro_pessoas.html', {'form': form})
@@ -152,6 +158,9 @@ def cadastro_livro(request):
             post = form.save(commit=False)
             post.save()
             return redirect('listar_livros')
+        else:
+            return render(request, 'cadastro_livro.html',
+                          {'form': form})
     else:
         form = forms.LivroForm()
         return render(request, 'cadastro_livro.html', {'form': form})
@@ -195,7 +204,10 @@ def cadastro_artigo(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
-            return redirect('listar_artigos.html')
+            return redirect('listar_artigos')
+        else:
+            return render(request, 'cadastro_artigo.html',
+                      {'form': form})
     else:
         form = forms.ArtigoForm()
         return render(request, 'cadastro_artigo.html', {'form': form})

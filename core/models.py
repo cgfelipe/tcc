@@ -217,10 +217,10 @@ class Curriculo(Base, models.Model):
 class Artigo(Base, models.Model):
     titulo = models.CharField(max_length=200)
     data = models.DateField()
-    estudante = models.OneToOneField(
-        Estudante, on_delete=models.CASCADE, null=False, verbose_name='estudante responsavel')
-    professor = models.OneToOneField(
-        Professor, on_delete=models.CASCADE, null=False, verbose_name='professor orientador')
+    estudante = models.ForeignKey(
+        to=Estudante, on_delete=models.CASCADE, null=False, verbose_name='estudante responsavel')
+    professor = models.ForeignKey(
+        to=Professor, on_delete=models.CASCADE, null=False, verbose_name='professor orientador')
     resumo = models.CharField(max_length=500)
     paginas = models.IntegerField()
     nota = models.FloatField()
@@ -282,8 +282,8 @@ class Livro(models.Model):
     dataCriacao = models.DateField()
     ano = models.IntegerField()
     disciplinas = models.CharField(max_length=200)
-    estudante = models.OneToOneField(
-        Estudante, on_delete=models.CASCADE, null=False, verbose_name='estudante que usa o livro')
+    estudante = models.ForeignKey(
+        to=Estudante, on_delete=models.CASCADE, null=False, verbose_name='estudante que usa o livro')
     emprestado = models.BooleanField()
 
     @staticmethod
