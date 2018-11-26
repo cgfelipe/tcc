@@ -66,9 +66,9 @@ urlpatterns = [
         name='listar_instituicoes'),
     url(r'^cadastro_instituicao', entities_views.cadastro_instituicao,
         name='cadastro_instituicao'),
-    url(r'^excluir_instituicao/(?P<cnpj>\d+)$', entities_views.excluir_instituicao,
+    url(r'^excluir_instituicao/(?P<cnpj>\d+(?:-)?\d+)$', entities_views.excluir_instituicao,
         name='excluir_instituicao'),
-    url(r'^atualizar_instituicao/(?P<cnpj>\d+)$', entities_views.atualizar_instituicao,
+    url(r'^atualizar_instituicao/(?P<cnpj>\d+(?:-)?\d+)$', entities_views.atualizar_instituicao,
         name='atualizar_instituicao'),
 
 

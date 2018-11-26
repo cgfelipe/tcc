@@ -10,15 +10,15 @@ class Base(object):
 
 class Endereco(Base, models.Model):
     id = models.AutoField(primary_key=True)
-    cep = models.CharField(max_length=10)
-    logradouro = models.CharField(max_length=50)
+    cep = models.CharField(max_length=8)
+    logradouro = models.CharField(max_length=20)
     numero = models.CharField(max_length=10)
-    complemento = models.CharField(max_length=50)
-    referencia = models.CharField(max_length=50)
-    bairro = models.CharField(max_length=30)
-    cidade = models.CharField(max_length=30)
+    complemento = models.CharField(max_length=5)
+    referencia = models.CharField(max_length=10)
+    bairro = models.CharField(max_length=10)
+    cidade = models.CharField(max_length=10)
     estado = models.CharField(max_length=2)
-    pais = models.CharField(max_length=30)
+    pais = models.CharField(max_length=10)
 
     def __str__(self):
         return self.logradouro
@@ -121,8 +121,8 @@ class Professor(Pessoa):
         Especialidade, on_delete=models.CASCADE, null=False, verbose_name='especialidades do professor'
     )
     salario = models.FloatField(null=False)
-    agenciaBancaria = models.CharField(max_length=200)
-    contaBancaria = models.CharField(max_length=200)
+    agenciaBancaria = models.CharField(max_length=10)
+    contaBancaria = models.CharField(max_length=10)
     projetos = models.CharField(max_length=500)
 
     def __str__(self):
@@ -176,7 +176,7 @@ class Estudante(Pessoa):
 
 class Curso(models.Model):
     id = models.AutoField(primary_key=True)
-    nome_curso = models.CharField(max_length=200)
+    nome_curso = models.CharField(max_length=50)
 
     def __str__(self):
         return self.nome_curso
@@ -198,7 +198,7 @@ class Curso(models.Model):
 
 class Departamento(models.Model):
     id = models.AutoField(primary_key=True)
-    nome = models.CharField(max_length=200)
+    nome = models.CharField(max_length=20)
     dataFundacao = models.DateField()
     diretor = models.OneToOneField(
         Professor, on_delete=models.CASCADE, null=False, verbose_name='diretor do departamento'
@@ -256,7 +256,7 @@ class Curriculo(Base, models.Model):
 
 
 class Artigo(Base, models.Model):
-    titulo = models.CharField(max_length=200)
+    titulo = models.CharField(max_length=20)
     data = models.DateField()
     estudante = models.ForeignKey(
         to=Estudante, on_delete=models.CASCADE, null=False, verbose_name='estudante responsavel')
@@ -267,7 +267,7 @@ class Artigo(Base, models.Model):
     nota = models.FloatField()
     classificacao = models.CharField(max_length=10)
     apresentacao = models.BooleanField()
-    disciplina = models.CharField(max_length=30)
+    disciplina = models.CharField(max_length=20)
 
     @staticmethod
     def buscar(_titulo):
@@ -285,15 +285,15 @@ class Artigo(Base, models.Model):
 
 
 class Instituicao(models.Model):
-    nome = models.CharField(max_length=200)
+    nome = models.CharField(max_length=50)
     cnpj = models.CharField(primary_key=True, max_length=15)
     endereco = models.OneToOneField(
         Endereco, on_delete=models.CASCADE, null=False, verbose_name='endereço da instituição')
     fundador = models.OneToOneField(
         Pessoa, on_delete=models.CASCADE, null=False, verbose_name='fundador da instituição')
     dataFundacao = models.DateField()
-    site = models.CharField(max_length=200)
-    telefone = models.CharField(max_length=200)
+    site = models.CharField(max_length=50)
+    telefone = models.CharField(max_length=11)
     numeroFuncionarios = models.IntegerField()
     departamentos = models.ForeignKey(
         Departamento, on_delete=models.CASCADE, verbose_name='lista de departamentos')
@@ -315,14 +315,14 @@ class Instituicao(models.Model):
 
 
 class Livro(models.Model):
-    titulo = models.CharField(max_length=200)
-    autores = models.CharField(max_length=200)
-    editora = models.CharField(max_length=200)
+    titulo = models.CharField(max_length=50)
+    autores = models.CharField(max_length=100)
+    editora = models.CharField(max_length=100)
     edicao = models.IntegerField()
     valor = models.FloatField()
     dataCriacao = models.DateField()
     ano = models.IntegerField()
-    disciplinas = models.CharField(max_length=200)
+    disciplinas = models.CharField(max_length=50)
     estudante = models.ForeignKey(
         to=Estudante, on_delete=models.CASCADE, null=False, verbose_name='estudante que usa o livro')
     emprestado = models.BooleanField()
@@ -345,14 +345,14 @@ class Livro(models.Model):
 
 class ProjetoDePesquisa(models.Model):
     id = models.AutoField(primary_key=True)
-    idLattes = models.CharField(max_length=100)
-    titulo = models.CharField(max_length=200)
+    idLattes = models.CharField(max_length=7)
+    titulo = models.CharField(max_length=50)
     inicio = models.DateField()
     fim = models.DateField()
-    keywords = models.CharField(max_length=200)
+    keywords = models.CharField(max_length=50)
     valorProjeto = models.FloatField()
-    situacao = models.CharField(max_length=200)
-    alunos = models.CharField(max_length=200)
+    situacao = models.CharField(max_length=100)
+    alunos = models.CharField(max_length=50)
     professor = models.ForeignKey(
         to=Professor, on_delete=models.CASCADE, null=False, verbose_name='professor orientador')
     departamentoResponsavel = models.ForeignKey(
