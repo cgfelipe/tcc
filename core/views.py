@@ -89,12 +89,9 @@ def cadastro_professor(request):
 def cadastro_instituicao(request):
     if request.method == 'POST':
         form = forms.InstituicaoForm(request.POST)
-        form_endereco = forms.EnderecoForm(request.POST)
-        if form.is_valid() & form_endereco.is_valid():
+        if form.is_valid():
             post = form.save(commit=False)
             post.save()
-            post_endereco = form_endereco.save(commit=False)
-            post_endereco.save()
             return redirect('listar_instituicoes')
         else:
             return render(request, 'cadastro_instituicao.html',
