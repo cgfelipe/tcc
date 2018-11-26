@@ -78,7 +78,7 @@ urlpatterns = [
         name='cadastro_projeto_pesquisa'),
     url(r'^excluir_projeto_pesquisa/(?P<id>\d+)$', entities_views.excluir_projeto_pesquisa,
         name='excluir_projeto_pesquisa'),
-    url(r'^atualizar_projeto_pesquisa/(?P<id>\d+)$', entities_views.atualizar_instituicao,
+    url(r'^atualizar_projeto_pesquisa/(?P<id>\d+)$', entities_views.atualizar_projeto_pesquisa,
         name='atualizar_projeto_pesquisa'),
 
 
