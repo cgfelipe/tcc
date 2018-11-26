@@ -338,7 +338,7 @@ def atualizar_professor(request, id):
 def atualizar_artigo(request, id):
     e = get_object_or_404(models.Artigo, id=id)
     if request.method == 'POST':
-        form = forms.ProfessorForm(request.POST, instance=e)
+        form = forms.ArtigoForm(request.POST, instance=e)
         if form.is_valid() and form:
             form.save()
             return artigos(request)
