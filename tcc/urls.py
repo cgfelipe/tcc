@@ -9,7 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 router = routers.DefaultRouter()
 
 urlpatterns = [
-    url(r'^admin', entities_views.index, name='index'),
+    url(r'^index', entities_views.index, name='index'),
 
     url(r'^cadastro_pessoa', entities_views.cadastro_pessoa,
         name='cadastro_pessoa'),
