@@ -3,13 +3,13 @@ class ProjetoPesquisa:
     __inicio = ""
     __fim = ""
     __idLattes = 0
-    __keywords = 0.0
+    __keywords = ""
     __valorProjeto = ""
     __titulo = ""
     __situacao = ""
     __alunos = ""
-    __professorOrientador = ""
-    __departamentoResponsavel = ""
+    __professorOrientador = None
+    __departamentoResponsavel = None
 
     def __init__(self, titulo, inicio, responsaveCurriculo, idLattes, keywords, valorProjeto, situacao, alunos, professorOrientador, departamentoResponsavel):
         self.__titulo = titulo

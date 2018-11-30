@@ -2,8 +2,8 @@ class Artigo:
 
     __titulo = ""
     __data = ""
-    __estudante = ""
-    __professor = ""
+    __estudante = None
+    __professor = None
     __resumo = ""
     __paginas = 0
     __nota = 0.0

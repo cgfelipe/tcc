@@ -8,8 +8,8 @@ class Livro:
     __ano = 0
     __valor = 0.0
     __disciplinas = ""
-    __estudante = ""
-    __emprestado = ""
+    __estudante = None
+    __emprestado = False
 
     def __init__(self, titulo, dataCriacao, autores, editora, edicao, ano, valor, disciplinas, estudante, emprestado):
         self.__titulo = titulo

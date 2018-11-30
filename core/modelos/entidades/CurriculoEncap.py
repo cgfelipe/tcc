@@ -1,23 +1,26 @@
 class Curriculo:
 
+    __id = ""
     __objetivo = ""
-    __responsavelCurriculo = ""
-    __idLattes = 0
-    __pretensaoSalarial = 0.0
+    __pessoa = None
+    __idLattes = ""
+    __pretensaoSalarial = ""
     __ultimaAtualizacao = ""
     __titulo = ""
-    __endereco = ""
+    __endereco = None
     __experiencia = ""
     __competencias = ""
     __formacoes = ""
 
-    def __init__(self, titulo, objetivo, responsaveCurriculo, idLattes, pretensaoSalarial, ultimaAtualizacao, endereco, experiencia, competencias, formacoes):
-        self.__titulo = titulo
+
+    def __init__(self, id, objetivo, pessoa, idLattes, pretensaoSalarial, ultimaAtualizacao, titulo, endereco, experiencia, competencias, formacoes):
+        self.__id = id
         self.__objetivo = objetivo
-        self.__responsavelCurriculo = responsaveCurriculo
+        self.__pessoa = pessoa
         self.__idLattes = idLattes
         self.__pretensaoSalarial = pretensaoSalarial
         self.__ultimaAtualizacao = ultimaAtualizacao
+        self.__titulo = titulo
         self.__endereco = endereco
         self.__experiencia = experiencia
         self.__competencias = competencias
@@ -31,6 +34,13 @@ class Curriculo:
     def titulo(self, titulo):
         self.__titulo = titulo
 
+    def id(self):
+        return self.__id
+
+    @id.setter
+    def id(self, id):
+        self.__id = id
+
     @property
     def objetivo(self):
         return self.__objetivo
@@ -39,13 +49,12 @@ class Curriculo:
     def objetivo(self, objetivo):
         self.__objetivo = objetivo
 
-    @property
-    def responsavelCurriculo(self):
-        return self.__responsavelCurriculo
+    def pessoa(self):
+        return self.__pessoa
 
-    @responsavelCurriculo.setter
-    def responsavelCurriculo(self, responsavelCurriculo):
-        self.__responsavelCurriculo = responsavelCurriculo
+    @pessoa.setter
+    def pessoa(self, pessoa):
+        self.__pessoa = pessoa
 
     @property
     def idLattes(self):
@@ -102,3 +111,4 @@ class Curriculo:
     @formacoes.setter
     def formacoes(self, formacoes):
         self.__formacoes = formacoes
+

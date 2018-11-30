@@ -1,19 +1,27 @@
 class Pessoa:
 
     __nome = ""
+    __nomeMae = ""
+    __dataNascimento = ""
     __email = ""
-    __cpf = ""
+    __telefone = ""
+    __endereco = None
     __usuario = ""
     __senha = ""
-    __data_nascimento = ""
+    __cpf = ""
+    __rg = ""
 
-    def __init__(self, nome, email, cpf, usuario, senha, data_nascimento):
+    def __init__(self, nome, nomeMae, dataNascimento, email, telefone, endereco, usuario, senha, cpf, rg):
         self.__nome = nome
+        self.__nomeMae = nomeMae
+        self.__dataNascimento = dataNascimento
         self.__email = email
-        self.__cpf = cpf
+        self.__telefone = telefone
+        self.__endereco = endereco
         self.__usuario = usuario
         self.__senha = senha
-        self.__data_nascimento = data_nascimento
+        self.__cpf = cpf
+        self.__rg = rg
 
     @property
     def nome(self):
@@ -24,6 +32,22 @@ class Pessoa:
         self.__nome = nome
 
     @property
+    def nomeMae(self):
+        return self.__nomeMae
+
+    @nomeMae.setter
+    def nomeMae(self, nomeMae):
+        self.__nomeMae = nomeMae
+
+    @property
+    def dataNascimento(self):
+        return self.__dataNascimento
+
+    @dataNascimento.setter
+    def dataNascimento(self, dataNascimento):
+        self.__dataNascimento = dataNascimento
+
+    @property
     def email(self):
         return self.__email
 
@@ -32,12 +56,20 @@ class Pessoa:
         self.__email = email
 
     @property
-    def cpf(self):
-        return self.__cpf
+    def telefone(self):
+        return self.__telefone
 
-    @cpf.setter
-    def cpf(self, cpf):
-        self.__cpf = cpf
+    @telefone.setter
+    def telefone(self, telefone):
+        self.__telefone = telefone
+
+    @property
+    def endereco(self):
+        return self.__endereco
+
+    @endereco.setter
+    def endereco(self, endereco):
+        self.__endereco = endereco
 
     @property
     def usuario(self):
@@ -56,9 +88,17 @@ class Pessoa:
         self.__senha = senha
 
     @property
-    def data_nascimento(self):
-        return self.__data_nascimento
+    def cpf(self):
+        return self.__cpf
 
-    @data_nascimento.setter
-    def data_nascimento(self, data_nascimento):
-        self.__data_nascimento = data_nascimento
+    @cpf.setter
+    def cpf(self, cpf):
+        self.__cpf = cpf
+
+    @property
+    def rg(self):
+        return self.__rg
+
+    @rg.setter
+    def rg(self, rg):
+        self.__rg = rg

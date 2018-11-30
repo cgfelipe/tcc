@@ -2,8 +2,8 @@ class Instituicao:
 
     __nome = ""
     __cnpj = ""
-    __fundador = ""
-    __endereco = ""
+    __fundador = None
+    __endereco = None
     __dataFundacao = ""
     __site = ""
     __telefone = ""
