@@ -60,5 +60,5 @@ class Pessoa:
         return self.__data_nascimento
 
     @data_nascimento.setter
-    def data_nascimento(self, novo_nome):
+    def data_nascimento(self, data_nascimento):
         self.__data_nascimento = data_nascimento
