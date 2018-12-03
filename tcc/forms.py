@@ -31,7 +31,7 @@ class DepartamentoForm(ModelForm):
     class Meta:
         model = models.Departamento
         fields = ['nome', 'dataFundacao', 'diretor',
-                  'quantidadeSalas', 'rendaAnual', 'cursos', ]
+                  'quantidadeSalas', 'rendaAnual', 'quantidadeAlunos', 'quantidadeProfessores', 'descricao', 'siglaDepartamento', 'cursos', ]
 
 
 class CurriculoForm(ModelForm):

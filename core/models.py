@@ -204,6 +204,10 @@ class Departamento(models.Model):
         Professor, on_delete=models.CASCADE, null=False, verbose_name='diretor do departamento'
     )
     quantidadeSalas = models.IntegerField()
+    quantidadeAlunos = models.IntegerField(null=True)
+    quantidadeProfessores = models.IntegerField(null=True)
+    descricao = models.CharField(max_length=500, null=True)
+    siglaDepartamento = models.CharField(max_length=3, null=True, verbose_name='sigla do departamento')
     rendaAnual = models.FloatField()
     cursos = models.ManyToManyField(to=Curso, null=False)
 
