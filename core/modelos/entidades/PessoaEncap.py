@@ -10,6 +10,8 @@ class Pessoa:
     __senha = ""
     __cpf = ""
     __rg = ""
+    class Meta:
+        abstract=True
 
     def __init__(self, nome, nomeMae, dataNascimento, email, telefone, endereco, usuario, senha, cpf, rg):
         self.__nome = nome

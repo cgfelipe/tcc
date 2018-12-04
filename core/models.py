@@ -20,6 +20,7 @@ class Endereco(Base, models.Model):
     estado = models.CharField(max_length=2)
     pais = models.CharField(max_length=10)
 
+
     def __str__(self):
         return self.logradouro
 
@@ -198,7 +199,7 @@ class Curso(models.Model):
 
 class Departamento(models.Model):
     id = models.AutoField(primary_key=True)
-    nome = models.CharField(max_length=20)
+    nome = models.CharField(max_length=50)
     dataFundacao = models.DateField()
     diretor = models.OneToOneField(
         Professor, on_delete=models.CASCADE, null=False, verbose_name='diretor do departamento'
